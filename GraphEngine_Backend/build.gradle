@@ -11,4 +11,5 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'org.javalite:activejdbc:1.4.10'
     compile 'org.javalite:activejdbc-instrumentation:1.4.10'
+    compile 'mysql:mysql-connector-java:5.1.16'
 }
