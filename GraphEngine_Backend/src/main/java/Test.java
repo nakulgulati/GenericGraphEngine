@@ -1,11 +1,14 @@
+import org.javalite.activejdbc.Base;
 
-/**
- * Created by nakulgulati on 8/2/15.
- */
+import java.util.List;
+
 public class Test {
 
     public static void main(String[] args){
         System.out.print("test");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
+
+        List<Node> nodes = Node.findAll();
     }
 
 }
