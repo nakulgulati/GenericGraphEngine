@@ -54,3 +54,8 @@ compileJava.doLast {
     addUrlIfNotPresent Instrumentation.class.classLoader, projectMainClassesDir
     instrumentation.instrument()
 }
+
+task run(dependsOn: 'build', type: JavaExec) {
+    main = 'Test'
+    classpath = sourceSets.main.runtimeClasspath
+}
