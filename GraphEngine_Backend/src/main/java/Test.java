@@ -7,17 +7,11 @@ public class Test {
     public static void main(String[] args){
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
 
-        List<String> list = Node.attributes();
-        String s;
 
-        for(int i = 0; i<list.size(); i++){
-            s = list.get(i);
-            System.out.println(s);
-        }
+        Node n = Node.findById(1);
 
-        Node n = new Node();
+        System.out.println(n.toJson(true));
 
-        n.set("name", "A");
     }
 
 }
