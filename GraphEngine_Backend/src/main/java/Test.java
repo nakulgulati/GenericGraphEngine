@@ -1,6 +1,8 @@
 import org.javalite.activejdbc.Base;
 
 import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.*;
 import java.util.List;
@@ -9,8 +11,9 @@ public class Test {
 
     private static ServerSocket ss = null;
     private static Socket cs = null;
+    private static PrintStream os = null;
     private static DataInputStream is = null;
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "1234");
 
         List<String> list = Node.attributes();
@@ -26,19 +29,33 @@ public class Test {
         n.set("name", "A");
 
     try{
-        ss = new ServerSocket(6969);
+        ss = new ServerSocket(6967);
+        System.out.println("Started");
 
 
         while(true){
+
             cs = ss.accept();
+
+            System.out.println(cs);
             is = new DataInputStream(cs.getInputStream());
-            System.out.println(is.readUTF());
+            os = new PrintStream(cs.getOutputStream());
+            System.out.println(is.readLine());
+            os.println("YoYo");
 
         }
+
     }catch (Exception e){
         System.err.println(e);
-    }
+    }finally {
 
+    }
+        try {
+            cs.close();
+            ss.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
