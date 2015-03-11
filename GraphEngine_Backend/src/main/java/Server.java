@@ -1,5 +1,4 @@
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -58,15 +57,25 @@ public class Server {
         public void run() {
             System.out.println("Client Accepted");
             try {
-                /*InputStream input  = clientSocket.getInputStream();*/
+                InputStream input  = clientSocket.getInputStream();
                 OutputStream output = clientSocket.getOutputStream();
                 long time = System.currentTimeMillis();
-                output.write(("Your request is under processing").getBytes());
+                /*output.write(("Your request is under processing").getBytes());*/
+
+                PrintStream os = new PrintStream(output);
 
                 /*process here*/
 
+                String s = new DataInputStream(input).readLine();
+
+
+
+
+
+                os.println("response");
+
                 output.close();
-                /*input.close();*/
+                input.close();
                 System.out.println("Request processed: " + time);
             } catch (IOException e) {
                 //report exception somewhere.
