@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Type Form</title>
+    <title>Edge Form</title>
 </head>
 <body>
 
