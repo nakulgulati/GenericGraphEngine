@@ -17,7 +17,8 @@ public class Test {
 
         JSONObject jsonObject = new JSONObject(s);
 
-        System.out.println(jsonObject.get("table").toString());
+        System.out.println(jsonObject.toString());
+        System.out.println(jsonObject.getJSONObject("data").get("name").toString());
 
     }
 }
