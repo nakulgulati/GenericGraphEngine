@@ -1,4 +1,3 @@
-
 <?php
 if(isset($_POST['Submit1'])) {
     $name = $_POST['name'];
