@@ -5,6 +5,9 @@ public class Type extends TableModel {
 
     @Override
     public LazyList<TableModel> read(JSONObject params){
+        /*TODO
+        * handle exceptions
+        */
         String field = params.get("field").toString();
         LazyList<TableModel> modelList = null;
         Type type;
@@ -15,7 +18,8 @@ public class Type extends TableModel {
                 break;
             default:
                 type = Type.findById(Integer.parseInt(field));
-                modelList.add(type);
+                if(type != null)
+                    modelList.add(type);
         }
 
         return modelList;
@@ -23,16 +27,36 @@ public class Type extends TableModel {
 
     @Override
     public boolean add(JSONObject params) {
-        return super.add(params);
+        /*TODO
+        * handle exceptions
+        */
+        Type type = new Type();
+        type.set("name", params.getString("name"));
+        return type.saveIt();
     }
 
     @Override
     public boolean update(JSONObject params) {
-        return super.update(params);
+        /*TODO
+        * handle exceptions
+        */
+        int id = Integer.parseInt(params.getString("id"));
+        Type type = Type.findById(id);
+        return type != null && type.set("name", params.getString("name")).saveIt();
+
     }
 
     @Override
     public boolean remove(JSONObject params) {
-        return super.remove(params);
+        /*TODO
+        * handle exceptions
+        */
+        int id = Integer.parseInt(params.getString("id"));
+        Type type = Type.findById(id);
+        if(type != null){
+            type.deleteCascade();
+            return true;
+        }
+        return false;
     }
 }
