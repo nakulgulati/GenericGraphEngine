@@ -1,3 +1,8 @@
+import org.javalite.activejdbc.Base;
+import org.javalite.activejdbc.LazyList;
+import org.javalite.activejdbc.Model;
+import org.json.JSONObject;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -55,29 +60,62 @@ public class Server {
 
         @Override
         public void run() {
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
             System.out.println("Client Accepted");
             try {
                 InputStream input  = clientSocket.getInputStream();
                 OutputStream output = clientSocket.getOutputStream();
                 long time = System.currentTimeMillis();
-                /*output.write(("Your request is under processing").getBytes());*/
 
                 PrintStream os = new PrintStream(output);
 
                 /*process here*/
 
-                String s = new DataInputStream(input).readLine();
+                /*
+                * string to json -> DONE
+                * process json
+                * determine model -> return object -> DONE
+                * determine operation (CRUD) -> call appropriate method on object
+                * */
+
+                String s = new BufferedReader(new InputStreamReader(input)).readLine();
+                System.out.println(s);
+
+/*
+                while((new BufferedReader(new InputStreamReader(input)).readLine()).equals(null)){
+                    s = new BufferedReader(new InputStreamReader(input)).readLine();
+                    System.out.println(s);
+                }*/
+
+                /*{
+                    "table" : "type",
+                    "method" : "read",
+                    "field" : "*"
+                }*/
 
 
 
+                /*JSONObject jsonObject = new JSONObject(s);
 
+                if(jsonObject.get("table").equals("type") && jsonObject.get("method").equals("read")){
+                    System.out.println(jsonObject.get("field"));
 
-                os.println("response");
+                    Model m = new Type();
+
+                    LazyList<Model> types = m.findAll();
+
+                    String json = types.toJson(true);
+                    os.println(json);
+                    System.out.println(json);
+                }
+
+                Test t = new Test();
+                t.t();*/
 
                 output.close();
                 input.close();
                 System.out.println("Request processed: " + time);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 //report exception somewhere.
                 e.printStackTrace();
             }
