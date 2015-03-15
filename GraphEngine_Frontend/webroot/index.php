@@ -87,7 +87,9 @@ if(isset($_POST['Submit_type_add'])) {
         {
             $data = array("table" => "edge",
                 "method" => "update",
-                "id" => $id);
+                "id" => $id,
+                "n_to_id" => $n_to_id
+            );
         }
         else
         {
