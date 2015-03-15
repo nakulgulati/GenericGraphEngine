@@ -1,6 +1,12 @@
+import org.javalite.activejdbc.LazyList;
 import org.json.JSONObject;
 
 public class Edge extends TableModel {
+
+    @Override
+    public LazyList<TableModel> read(JSONObject params) {
+        return super.read(params);
+    }
 
     @Override
     public boolean add(JSONObject params) {

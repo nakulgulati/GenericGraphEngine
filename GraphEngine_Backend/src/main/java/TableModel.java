@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 public class TableModel extends Model {
 
-    public LazyList<TableModel> read(String params){
+    public LazyList<TableModel> read(JSONObject params){
         return null;
     }
 

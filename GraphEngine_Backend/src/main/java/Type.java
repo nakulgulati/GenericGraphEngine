@@ -4,16 +4,17 @@ import org.json.JSONObject;
 public class Type extends TableModel {
 
     @Override
-    public LazyList<TableModel> read(String params){
+    public LazyList<TableModel> read(JSONObject params){
+        String field = params.get("field").toString();
         LazyList<TableModel> modelList = null;
         Type type;
 
-        switch (params){
+        switch (field){
             case "*":
                 modelList = Type.findAll();
                 break;
             default:
-                type = Type.findById(Integer.parseInt(params));
+                type = Type.findById(Integer.parseInt(field));
                 modelList.add(type);
         }
 
