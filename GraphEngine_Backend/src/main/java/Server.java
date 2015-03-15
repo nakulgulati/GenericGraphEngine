@@ -60,7 +60,7 @@ public class Server {
 
         @Override
         public void run() {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
+
             System.out.println("Client Accepted");
             try {
                 InputStream input  = clientSocket.getInputStream();
@@ -71,46 +71,11 @@ public class Server {
 
                 /*process here*/
 
-                /*
-                * string to json -> DONE
-                * process json
-                * determine model -> return object -> DONE
-                * determine operation (CRUD) -> call appropriate method on object
-                * */
-
                 String s = new BufferedReader(new InputStreamReader(input)).readLine();
                 System.out.println(s);
 
-/*
-                while((new BufferedReader(new InputStreamReader(input)).readLine()).equals(null)){
-                    s = new BufferedReader(new InputStreamReader(input)).readLine();
-                    System.out.println(s);
-                }*/
-
-                /*{
-                    "table" : "type",
-                    "method" : "read",
-                    "field" : "*"
-                }*/
-
-
-
-                /*JSONObject jsonObject = new JSONObject(s);
-
-                if(jsonObject.get("table").equals("type") && jsonObject.get("method").equals("read")){
-                    System.out.println(jsonObject.get("field"));
-
-                    Model m = new Type();
-
-                    LazyList<Model> types = m.findAll();
-
-                    String json = types.toJson(true);
-                    os.println(json);
-                    System.out.println(json);
-                }
-
-                Test t = new Test();
-                t.t();*/
+                String response = new Process(s).operateCRUD();
+                os.println(response);
 
                 output.close();
                 input.close();
@@ -124,8 +89,10 @@ public class Server {
     }
 
     public static void main(String[] args){
-        Server s = new Server(8090);
-        s.run();
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
+
+        Server server = new Server(8090);
+        server.run();
     }
 
 }

@@ -1,5 +1,6 @@
 import org.javalite.activejdbc.LazyList;
 import org.javalite.activejdbc.Model;
+import org.json.JSONObject;
 
 public class TableModel extends Model {
 
@@ -7,15 +8,15 @@ public class TableModel extends Model {
         return null;
     }
 
-    public boolean add(String params){
+    public boolean add(JSONObject params){
        return false;
     }
 
-    public boolean update(String params){
+    public boolean update(JSONObject params){
         return false;
     }
 
-    public boolean remove(String params){
+    public boolean remove(JSONObject params){
         return false;
     }
 

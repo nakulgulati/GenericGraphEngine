@@ -11,15 +11,8 @@ public class Test {
                 "\"field\" : \"*\"\n" +
                 "}";
 
-        new Process(s).operateCRUD();
-
-        /*JSONObject jsonObject = new JSONObject(s);
-
-        System.out.println(jsonObject.toString());
-        System.out.println(jsonObject.getJSONObject("data").get("name").toString());*/
-
-
-
+        String response = new Process(s).operateCRUD();
+        System.out.println(response);
 
     }
 

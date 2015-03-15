@@ -39,12 +39,13 @@ public class Process {
 
         String operation = json.get("operation").toString();
         String field = json.get("field").toString();
+        Object response = null;
 
         switch (operation){
             case "create":
                 break;
             case "read":
-                System.out.println(model.read(field).toJson(true));
+                response = model.read(field).toJson(true);
                 break;
             case "update":
                 break;
@@ -52,7 +53,7 @@ public class Process {
                 break;
         }
 
-        return null;
+        return response.toString();
     }
 
 }

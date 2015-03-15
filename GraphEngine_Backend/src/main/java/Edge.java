@@ -1,17 +1,19 @@
+import org.json.JSONObject;
+
 public class Edge extends TableModel {
 
     @Override
-    public boolean add(String params) {
+    public boolean add(JSONObject params) {
         return super.add(params);
     }
 
     @Override
-    public boolean update(String params) {
+    public boolean update(JSONObject params) {
         return super.update(params);
     }
 
     @Override
-    public boolean remove(String params) {
+    public boolean remove(JSONObject params) {
         return super.remove(params);
     }
 }
