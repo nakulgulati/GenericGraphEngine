@@ -24,7 +24,7 @@
     <INPUT TYPE = "Submit" Name = "Submit_type_update" VALUE = "Submit">
 
 </FORM>
-<Form name ="type_read" Method ="POST" Action ="test.php">
+<Form name ="type_read" Method ="POST" Action ="index.php">
 
     <INPUT TYPE = "TEXT" VALUE ="field" Name ="field">
 

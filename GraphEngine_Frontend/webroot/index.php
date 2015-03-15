@@ -160,11 +160,22 @@ if(isset($_POST['Submit_type_add'])) {
 
     $data=json_encode($data)."\n";
 
+    print_r($data);
+
 
     $service_port = 8090;
-    $address = '10.0.0.1';
-    $timeout = 3;
+    $address = '172.19.2.75';
 
+    $socket= socket_create(AF_INET,SOCK_STREAM,0) or die("Could not create socket\n");
+    $result = socket_connect($socket, $address, $service_port) or die("Could not connect to server\n");
+// send string to server
+    socket_write($socket, $data, strlen($data)) or die("Could not send data to server\n");
+// get server response
+    $result = socket_read ($socket, 2048) or die("Could not read server response\n");
+    echo "Reply From Server  :".$result;
+// close socket
+    socket_close($socket);
+/*
     $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 //socket_set_nonblock($socket);
     $error = NULL;
@@ -191,7 +202,7 @@ if(isset($_POST['Submit_type_add'])) {
         echo "Error Connecting Socket: Connect Timed Out After " . $timeout / 1000 . " seconds. " . socket_strerror(socket_last_error()) . "\n";
         socket_close($socket);
         return NULL;
-    }
+    }*/
 }
 else {
     print("Submit Failed!");
