@@ -38,14 +38,14 @@ public class Process {
     public synchronized String operateCRUD(){
 
         String operation = json.get("operation").toString();
-        String field = json.get("field").toString();
+        JSONObject data = json.getJSONObject("data");
         Object response = null;
 
         switch (operation){
             case "create":
                 break;
             case "read":
-                response = model.read(field).toJson(true);
+                response = model.read(data).toJson(true);
                 break;
             case "update":
                 break;
