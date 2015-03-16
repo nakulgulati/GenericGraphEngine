@@ -14,7 +14,9 @@ public class Node extends TableModel {
             break;
         case "id":
             node = Node.findById(Integer.parseInt(field));
-            modelList.add(node);
+            if(node!= null){
+                modelList.add(node);
+            }
             break;
         default:
             modelList = Node.where("type_id = ?", (Integer.parseInt(field)) );
@@ -26,7 +28,7 @@ public class Node extends TableModel {
     public boolean add(JSONObject params) {
         String name = params.get("name").toString();
         int type_id = Integer.parseInt(params.get("type_id").toString());
-        Node node=null;
+        Node node= new Node();
         node.set("name", "'"+name+"'" ).set("type_id", type_id);
         return node.saveIt();
     }
@@ -35,8 +37,8 @@ public class Node extends TableModel {
     public boolean update(JSONObject params) {
         int id = Integer.parseInt(params.get("id").toString());
 
-        Node node = null;
-        node = node.findById(id);
+        Node node ;
+        node = Node.findById(id);
         if(node == null){
             return false;
         }
@@ -56,8 +58,8 @@ public class Node extends TableModel {
     @Override
     public boolean remove(JSONObject params) {
         int id = Integer.parseInt(params.get("id").toString());
-        Node node= null;
-        node = node.findFirst("id= ?", "'"+ id+ "'");
+        Node node;
+        node = Node.findFirst("id= ?", "'"+ id+ "'");
         if (node==null){
             return false;
         }
