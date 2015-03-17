@@ -1,24 +1,24 @@
 import org.javalite.activejdbc.Base;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONStringer;
-import org.json.JSONTokener;
-import sun.org.mozilla.javascript.internal.json.JsonParser;
-
-import java.util.Objects;
-
 
 public class Test {
 
     public static void main(String[] args){
-        //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "1234");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
 
-        String s = "{\"table\":\"type\",\"method\":\"add\",\"data\":{\"name\":\"Yo!\"}}";
+        /*Type type = new Type();
+        type.set("name", "K");
+        type.saveIt();*/
 
-        JSONObject jsonObject = new JSONObject(s);
+        String s = "{\n" +
+                "\"table\" : \"type\",\n" +
+                "\"operation\" : \"create\",\n" +
+                "\"data\" : {" +
+                    "name : L" +
+                    "}" +
+                "}";
 
-        System.out.println(jsonObject.toString());
-        System.out.println(jsonObject.getJSONObject("data").get("name").toString());
+        String response = new Process(s).operateCRUD();
+        System.out.println(response);
 
     }
 }

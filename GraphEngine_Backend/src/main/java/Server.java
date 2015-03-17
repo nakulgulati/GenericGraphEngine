@@ -1,3 +1,8 @@
+import org.javalite.activejdbc.Base;
+import org.javalite.activejdbc.LazyList;
+import org.javalite.activejdbc.Model;
+import org.json.JSONObject;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -55,29 +60,27 @@ public class Server {
 
         @Override
         public void run() {
+
             System.out.println("Client Accepted");
             try {
                 InputStream input  = clientSocket.getInputStream();
                 OutputStream output = clientSocket.getOutputStream();
                 long time = System.currentTimeMillis();
-                /*output.write(("Your request is under processing").getBytes());*/
 
                 PrintStream os = new PrintStream(output);
 
                 /*process here*/
 
-                String s = new DataInputStream(input).readLine();
+                String s = new BufferedReader(new InputStreamReader(input)).readLine();
+                System.out.println(s);
 
-
-
-
-
-                os.println("response");
+                String response = new Process(s).operateCRUD();
+                os.println(response);
 
                 output.close();
                 input.close();
                 System.out.println("Request processed: " + time);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 //report exception somewhere.
                 e.printStackTrace();
             }
@@ -86,8 +89,10 @@ public class Server {
     }
 
     public static void main(String[] args){
-        Server s = new Server(8090);
-        s.run();
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
+
+        Server server = new Server(8090);
+        server.run();
     }
 
 }
