@@ -9,15 +9,40 @@ public class Test {
         type.set("name", "K");
         type.saveIt();*/
 
-        String s = "{\n" +
-                "\"table\" : \"type\",\n" +
+        String c = "{\n" +
+                "\"table\" : \"node\",\n" +
                 "\"operation\" : \"create\",\n" +
                 "\"data\" : {" +
-                    "name : L" +
+                    "name : node10,\n" +
+                    "type_id : 3\n" +
                     "}" +
                 "}";
 
-        String response = new Process(s).operateCRUD();
+        String r = "{\n" +
+                "\"table\" : \"node\",\n" +
+                "\"operation\" : \"read\",\n" +
+                "\"data\" : {" +
+                "field : 13" +
+                "}" +
+                "}";
+
+        String u = "{\n" +
+                "\"table\" : \"node\",\n" +
+                "\"operation\" : \"read\",\n" +
+                "\"data\" : {" +
+                "id : 13" +
+                "}" +
+                "}";
+
+        String d = "{\n" +
+                "\"table\" : \"node\",\n" +
+                "\"operation\" : \"read\",\n" +
+                "\"data\" : {" +
+                "id : 13" +
+                "}" +
+                "}";
+
+        String response = new Process(r).operateCRUD();
         System.out.println(response);
 
     }
