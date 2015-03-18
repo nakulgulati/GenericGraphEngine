@@ -4,21 +4,24 @@ import org.json.JSONObject;
 public class Node extends TableModel {
     @Override
     public LazyList<TableModel> read(JSONObject params) {
-        String field = params.get("field").toString();
+        String args;
         LazyList<TableModel> modelList = null;
         Node node;
         if(params.has("id")) {
-            node = Node.findById(Integer.parseInt(field));
+            args= params.get("id").toString();
+            node = Node.findById(Integer.parseInt(args));
             if (node != null) {
                 modelList.add(node);
             }
         }
         if(params.has("field")){
+            args= params.get("field").toString();
             modelList = Type.findAll();
         }
 
         if(params.has("type_id")){
-            modelList = Node.where("type_id = ?", (Integer.parseInt(field)) );
+            args= params.get("type_id").toString();
+            modelList = Node.where("type_id = ?", (Integer.parseInt(args)) );
         }
 
         return modelList;
