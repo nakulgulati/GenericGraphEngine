@@ -43,10 +43,10 @@ public class Process {
 
         switch (operation){
             case "create":
-                response = new Type().add(data);
+                response = model.add(data);
                 break;
             case "read":
-                response = model.read(data);
+                response = model.read(data).toJson(true);
                 break;
             case "update":
                 response = model.update(data);

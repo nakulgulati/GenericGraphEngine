@@ -11,17 +11,16 @@ public class Node extends TableModel {
             args= params.get("id").toString();
             node = Node.findById(Integer.parseInt(args));
             if (node != null) {
-                modelList.add(node);
+                modelList = Node.find("id = ?", args);
             }
         }
         if(params.has("field")){
-            args= params.get("field").toString();
             modelList = Type.findAll();
         }
 
         if(params.has("type_id")){
             args= params.get("type_id").toString();
-            modelList = Node.where("type_id = ?", (Integer.parseInt(args)) );
+            modelList = Node.find("type_id = ?", (Integer.parseInt(args)) );
         }
 
         return modelList;
@@ -32,7 +31,7 @@ public class Node extends TableModel {
         String name = params.get("name").toString();
         int type_id = Integer.parseInt(params.get("type_id").toString());
         Node node= new Node();
-        node.set("name", "'"+name+"'" ).set("type_id", type_id);
+        node.set("name", "'"+name+"'" );
         return node.saveIt();
     }
 
@@ -62,7 +61,7 @@ public class Node extends TableModel {
     public boolean remove(JSONObject params) {
         int id = Integer.parseInt(params.get("id").toString());
         Node node;
-        node = Node.findFirst("id= ?", "'"+ id+ "'");
+        node = Node.findFirst("id = ?",id);
         if (node==null){
             return false;
         }

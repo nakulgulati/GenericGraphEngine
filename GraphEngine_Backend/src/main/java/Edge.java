@@ -6,17 +6,16 @@ public class Edge extends TableModel {
     @Override
     public LazyList<TableModel> read(JSONObject params) {
 
-        String field = params.get("field").toString();
-        LazyList<TableModel> modelList;
+        LazyList<TableModel> modelList = null;
 
-        switch (field){
-        case "*":
+        if(params.has("field")){
             modelList = Edge.findAll();
-            break;
-
-        default:
-            modelList = Edge.where("type_id = ?", (Integer.parseInt(field)) );
         }
+
+        if(params.has("from_id")){
+            modelList = Edge.find("from_id = ?", Integer.parseInt(params.get("from_id").toString()));
+        }
+
         return modelList;
     }
 
@@ -40,14 +39,19 @@ public class Edge extends TableModel {
         if(params.has("id")){
             edge = Edge.findById(Integer.parseInt(params.get("id").toString()));
         }
-        else if(params.has("from_id") && params.has("to_id")){
-            edge= Edge.findById(Integer.parseInt(params.get("from_id").toString(),Integer.parseInt(params.get("to_id").toString())));
+        else if(params.has("from_id") && params.has("to_id") && params.has("to_id_new")){
+            int from_id = Integer.parseInt(params.get("from_id").toString());
+            int to_id = Integer.parseInt(params.get("to_id").toString());
+            edge = Edge.findFirst("from_id = ? && to_id = ?", from_id, to_id);
         }
         if(edge == null){
             return false;
         }
 
-       return edge.set("to_id= ?",Integer.parseInt(params.get("to_id").toString())).saveIt();
+        edge.set("to_id",Integer.parseInt(params.get("to_id_new").toString()));
+        System.out.println(edge.toJson(true).toString());
+
+       return edge.saveIt();
 
     }
 
