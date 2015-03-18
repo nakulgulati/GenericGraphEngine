@@ -1,195 +1,56 @@
-<?php
-function input_data()
-{
-    if (isset($_POST['Submit_type_add']) || isset($_POST['Submit_type_delete']) || isset($_POST['Submit_type_update']) || isset($_POST['Submit_type_read']) || isset($_POST['Submit_edge_add']) || isset($_POST['Submit_edge_delete']) || isset($_POST['Submit_edge_update']) || isset($_POST['Submit_edge_read']) || (isset($_POST['Submit_node_add']) || isset($_POST['Submit_node_delete']) || isset($_POST['Submit_node_update']) || isset($_POST['Submit_node_read']))) {
+<?php require_once('include/functions.php'); ?>
+<?php require_once('include/header.php'); ?>
 
-        if (isset($_POST['Submit_type_add'])) {
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3" >
+                <h1>Menu</h1>
 
-            $name = $_POST['name'];
+                <ul class="nav nav-pills nav-stacked">
 
-            $data = array(
-                "table" => "type",
-                "method" => "add",
-                "data" => array(
-                    "name" => $name
-                )
-            );
-        }
+                    <li><a data-toggle="collapse" href="#type" aria-expanded="false" aria-controls="type" >Type</a>
+                        <div class="collapse" id="type">
+                            <div class="well">
+                                <ul >
+                                    <li><a href="#">Add</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                    <li><a href="#">Update</a></li>
+                                    <li><a href="#">Read</a></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                    <li><a data-toggle="collapse" href="#node" aria-expanded="false" aria-controls="node" >Node</a>
+                        <div class="collapse" id="node">
+                            <div class="well">
+                                <ul >
+                                    <li><a href="#">Add</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                    <li><a href="#">Update</a></li>
+                                    <li><a href="#">Read</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a data-toggle="collapse" href="#edge" aria-expanded="false" aria-controls="edge" >Edge</a>
+                        <div class="collapse" id="edge">
+                            <div class="well">
+                                <ul >
+                                    <li><a href="#">Add</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                    <li><a href="#">Update</a></li>
+                                    <li><a href="#">Read</a></li>
+                                </ul>
+                            </div>
+                        </div></li>
+                </ul>
 
-        if (isset($_POST['Submit_type_delete'])) {
-
-            $id = $_POST['id'];
-
-            $data = array("table" => "type",
-                "method" => "delete",
-                "data"=> array(
-                    "id" => $id
-                )
-
-            );
-        }
-
-        if (isset($_POST['Submit_type_update'])) {
-
-            $name = $_POST['name'];
-            $id = $_POST['id'];
-
-            $data = array("table" => "type",
-                "method" => "update",
-                "data" => array(
-                "id" => $id,
-                "name" => $name
-                )
-
-            );
-        }
-        if (isset($_POST['Submit_type_read'])) {
-
-            $field = $_POST['field'];
-
-            $data = array("table" => "type",
-                "method" => "read",
-                "data"=> array(
-                "field" => $field
-                )
-            );
-        }
-
-        if (isset($_POST['Submit_edge_add'])) {
-
-            $from_id = $_POST['from_id'];
-            $to_id = $_POST['to_id'];
-            $data = array("table" => "edge",
-                "method" => "add",
-                "data"=> array(
-                "from_id" => $from_id,
-                "to_id" => $to_id
-                )
-            );
-        }
-
-        if (isset($_POST['Submit_edge_delete'])) {
-
-            $id = $_POST['id'];
-            $from_id = $_POST['from_id'];
-            $to_id = $_POST['to_id'];
-
-            if (!empty($id)) {
-                $data = array("table" => "edge",
-                    "method" => "delete",
-                    "data"=> array(
-                    "id" => $id
-                    )
-                );
-            } else {
-                $data = array("table" => "edge",
-                    "method" => "delete",
-                    "data"=>array(
-                    "from_id" => $from_id,
-                    "to_id" => $to_id)
-                );
-            }
-
-        }
-
-        if (isset($_POST['Submit_edge_update'])) {
-
-            $id = $_POST['id'];
-            $from_id = $_POST['from_id'];
-            $to_id = $_POST['to_id'];
-            $n_to_id = $_POST['new_to_id'];
-
-            if (!empty($id)) {
-                $data = array("table" => "edge",
-                    "method" => "update",
-                    "data"=>array(
-                    "id" => $id,
-                    "n_to_id" => $n_to_id)
-                );
-            } else {
-                $data = array("table" => "edge",
-                    "method" => "update",
-                    "data"=>array(
-                    "from_id" => $from_id,
-                    "to_id" => $to_id,
-                    "n_to_id" => $n_to_id
-                    )
-                );
-            }
-        }
-        if (isset($_POST['Submit_edge_read'])) {
-            $from_id = $_POST['from_id'];
-            $field = $_POST['field'];
-
-            $data = array("table" => "edge",
-                "method" => "read",
-                "data"=>array(
-                "from_id" => $from_id,
-                "field" => $field)
-            );
-        }
-        if (isset($_POST['Submit_node_add'])) {
-
-            $name = $_POST['name'];
-            $type_id = $_POST['type_id'];
-            $data = array("table" => "node",
-                "method" => "add",
-                "data"=>array(
-                "name" => $name,
-                "type_id" => $type_id)
-            );
-        }
-
-        if (isset($_POST['Submit_node_delete'])) {
-
-            $id = $_POST['id'];
-
-            $data = array("table" => "node",
-                "method" => "delete",
-                "data"=>array(
-                "id" => $id)
-            );
-        }
-
-        if (isset($_POST['Submit_node_update'])) {
+            </div>
+            <div class="col-lg-9">
+                <h1>Form/Output</h1>
 
 
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $type_id = $_POST['type_id'];
+            </div>
+        </div>
+    </div>
 
-            $data = array("table" => "node",
-                "method" => "update",
-                "data"=>array(
-                "id" => $id,
-                "(name,type_id)" => $name . "," . $type_id)
-            );
-        }
-        if (isset($_POST['Submit_node_read'])) {
-
-            $field = $_POST['field'];
-
-            $data = array("table" => "node",
-                "method" => "read",
-                "data"=>array(
-                "field" => $field
-            )
-            );
-        }
-
-
-        $data = json_encode($data) . "\n";
-
-        return $data;
-
-
-    }
-    
-    else {
-        print("Submit Failed!");
-
-    }
-
-}
-?>
-
+<?php require_once('include/footer.php'); ?>
