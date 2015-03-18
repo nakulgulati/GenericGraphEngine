@@ -40,9 +40,9 @@ public class Type extends TableModel {
         /*TODO
         * handle exceptions
         */
-        int id = Integer.parseInt(params.getString("id"));
+        int id = Integer.parseInt(params.get("id").toString());
         Type type = Type.findById(id);
-        return type != null && type.set("name", params.getString("name")).saveIt();
+        return type != null && type.set("name", params.get("name").toString()).saveIt();
 
     }
 
@@ -51,7 +51,7 @@ public class Type extends TableModel {
         /*TODO
         * handle exceptions
         */
-        int id = Integer.parseInt(params.getString("id"));
+        int id = Integer.parseInt(params.get("id").toString());
         Type type = Type.findById(id);
         if(type != null){
             type.deleteCascade();
