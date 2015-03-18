@@ -27,23 +27,26 @@ public class Test {
                 "}";
 
         String u = "{\n" +
-                "\"table\" : \"node\",\n" +
-                "\"operation\" : \"read\",\n" +
+                "\"table\" : \"edge\",\n" +
+                "\"operation\" : \"update\",\n" +
                 "\"data\" : {" +
-                "id : 13" +
+                "from_id : 1," +
+                "to_id : 5," +
+                "to_id_new : 2" +
                 "}" +
                 "}";
 
         String d = "{\n" +
-                "\"table\" : \"node\",\n" +
-                "\"operation\" : \"read\",\n" +
+                "\"table\" : \"edge\",\n" +
+                "\"operation\" : \"delete\",\n" +
                 "\"data\" : {" +
                 "id : 13" +
                 "}" +
                 "}";
 
-        String response = new Process(r).operateCRUD();
+        String response = new Process(u).operateCRUD();
         System.out.println(response);
+
 
     }
 }
