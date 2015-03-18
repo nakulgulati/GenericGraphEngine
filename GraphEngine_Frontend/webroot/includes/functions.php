@@ -6,7 +6,7 @@ if ($_POST) {
     }
     if (isset($_POST['Submit_type_add']) || isset($_POST['Submit_type_delete']) || isset($_POST['Submit_type_update']) || isset($_POST['Submit_type_read']) || isset($_POST['Submit_edge_add']) || isset($_POST['Submit_edge_delete']) || isset($_POST['Submit_edge_update']) || isset($_POST['Submit_edge_read']) || (isset($_POST['Submit_node_add']) || isset($_POST['Submit_node_delete']) || isset($_POST['Submit_node_update']) || isset($_POST['Submit_node_read']))) {
         $data = input_data();
-        $result = esend($data);
+        $result = send($data);
         display($result);
     } else {
         print("Submit Failed!");
