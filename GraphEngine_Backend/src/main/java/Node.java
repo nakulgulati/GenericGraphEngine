@@ -7,20 +7,20 @@ public class Node extends TableModel {
         String field = params.get("field").toString();
         LazyList<TableModel> modelList = null;
         Node node;
-
-        switch (field){
-        case "*":
-            modelList = Type.findAll();
-            break;
-        case "id":
+        if(params.has("id")) {
             node = Node.findById(Integer.parseInt(field));
-            if(node!= null){
+            if (node != null) {
                 modelList.add(node);
             }
-            break;
-        default:
+        }
+        if(params.has("field")){
+            modelList = Type.findAll();
+        }
+
+        if(params.has("type_id")){
             modelList = Node.where("type_id = ?", (Integer.parseInt(field)) );
         }
+
         return modelList;
     }
 
