@@ -1,11 +1,12 @@
 <?php require_once('includes/header.php'); ?>
+<?php require_once'includes/functions.php'; ?>
 <div>
     <h3>Add</h3>
-<Form name ="type_add" Method ="POST" Action ="test.php" >
+<Form name ="type_add" Method ="POST"  >
 
     <INPUT TYPE = "TEXT" VALUE ="name" Name ="name">
 
-    <INPUT TYPE = "Submit" Name = "Submit_type_add" VALUE = "Submit">
+    <INPUT TYPE = "Submit" Name = "Submit_type_add" VALUE = "Submit" >
 
 </FORM>
 </div>

@@ -1,3 +1,5 @@
+<?php require_once('includes/header.php'); ?>
+<?php require_once'includes/functions.php'; ?>
 <html>
 <head>
     <title>Edge Form</title>
@@ -44,3 +46,4 @@
 
 </body>
 </html>
+<?php require_once('includes/footer.php'); ?>
