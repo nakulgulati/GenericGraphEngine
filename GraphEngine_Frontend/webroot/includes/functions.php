@@ -1,6 +1,6 @@
 <?php
 
-if ($_POST) {
+/*if ($_POST) {
     if (isset ($_POST['Submit_main'])) {
         first();
     }
@@ -196,7 +196,7 @@ function input_data()
 
         return $data;
 
-}
+}*/
 
 function send($data){
     $service_port = 8090;
@@ -213,7 +213,7 @@ function send($data){
     socket_close($socket);
     return $result;
 }
-function first()
+/*function first()
 {
     if (isset($_POST['Submit_main'])) {
 
@@ -231,7 +231,7 @@ function first()
 
     }
 
-}
+}*/
 
 function display($result)
 {

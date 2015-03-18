@@ -1,5 +1,58 @@
 <?php require("includes/header.php");
 require("includes/functions.php");
+if (isset($_POST['Submit_type_add'])) {
+
+    $name = $_POST['name'];
+
+    $data = array(
+        "table" => "type",
+        "method" => "add",
+        "data" => array(
+            "name" => $name
+        )
+    );
+}
+
+if (isset($_POST['Submit_type_delete'])) {
+
+    $id = $_POST['id'];
+
+    $data = array("table" => "type",
+        "method" => "delete",
+        "data"=> array(
+            "id" => $id
+        )
+
+    );
+}
+
+if (isset($_POST['Submit_type_update'])) {
+
+    $name = $_POST['name'];
+    $id = $_POST['id'];
+
+    $data = array("table" => "type",
+        "method" => "update",
+        "data" => array(
+            "id" => $id,
+            "name" => $name
+        )
+
+    );
+}
+if (isset($_POST['Submit_type_read'])) {
+
+    $field = $_POST['field'];
+
+    $data = array("table" => "type",
+        "method" => "read",
+        "data"=> array(
+            "field" => $field
+        )
+    );
+}
+$data=json_encode($data)."\n";
+//send($data);
 ?>
 <div class="col-lg-6">
 <form name="type_add" method="post" action="">
