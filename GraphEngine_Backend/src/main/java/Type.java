@@ -8,18 +8,17 @@ public class Type extends TableModel {
         /*TODO
         * handle exceptions
         */
-        String field = params.get("field").toString();
+        String args;
         LazyList<TableModel> modelList = null;
         Type type;
-
-        switch (field){
-            case "*":
-                modelList = Type.findAll();
-                break;
-            default:
-                type = Type.findById(Integer.parseInt(field));
-                if(type != null)
-                    modelList.add(type);
+        if(params.has("field")){
+            modelList = Type.findAll();
+        }
+        if(params.has("id")){
+            args = params.get("id").toString();
+            type = Type.findById(Integer.parseInt(args));
+            if(type != null)
+                modelList.add(type);
         }
 
         return modelList;

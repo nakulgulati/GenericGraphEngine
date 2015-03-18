@@ -1,5 +1,81 @@
 <?php require("includes/header.php");
-require("includes/functions.php")?>
+require("includes/functions.php");
+if (isset($_POST['Submit_edge_add'])) {
+
+    $from_id = $_POST['from_id'];
+    $to_id = $_POST['to_id'];
+    $data = array("table" => "edge",
+        "method" => "add",
+        "data"=> array(
+            "from_id" => $from_id,
+            "to_id" => $to_id
+        )
+    );
+}
+
+if (isset($_POST['Submit_edge_delete'])) {
+
+    $id = $_POST['id'];
+    $from_id = $_POST['from_id'];
+    $to_id = $_POST['to_id'];
+
+    if (!empty($id)) {
+        $data = array("table" => "edge",
+            "method" => "delete",
+            "data"=> array(
+                "id" => $id
+            )
+        );
+    } else {
+        $data = array("table" => "edge",
+            "method" => "delete",
+            "data"=>array(
+                "from_id" => $from_id,
+                "to_id" => $to_id)
+        );
+    }
+
+}
+
+if (isset($_POST['Submit_edge_update'])) {
+
+    $id = $_POST['id'];
+    $from_id = $_POST['from_id'];
+    $to_id = $_POST['to_id'];
+    $n_to_id = $_POST['new_to_id'];
+
+    if (!empty($id)) {
+        $data = array("table" => "edge",
+            "method" => "update",
+            "data"=>array(
+                "id" => $id,
+                "n_to_id" => $n_to_id)
+        );
+    } else {
+        $data = array("table" => "edge",
+            "method" => "update",
+            "data"=>array(
+                "from_id" => $from_id,
+                "to_id" => $to_id,
+                "n_to_id" => $n_to_id
+            )
+        );
+    }
+}
+if (isset($_POST['Submit_edge_read'])) {
+    $from_id = $_POST['from_id'];
+    $field = $_POST['field'];
+
+    $data = array("table" => "edge",
+        "method" => "read",
+        "data"=>array(
+            "from_id" => $from_id,
+            "field" => $field)
+    );
+}
+$data=json_encode($data)."\n";
+//send($data);
+?>
 <div class="col-lg-6">
     <form name="edge_add" method="post">
         <h3>Add</h3>

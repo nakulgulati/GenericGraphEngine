@@ -1,5 +1,57 @@
 <?php require_once('includes/header.php');
-require("includes/functions.php");?>
+  require("includes/functions.php");
+if (isset($_POST['Submit_node_add'])) {
+
+    $name = $_POST['name'];
+    $type_id = $_POST['type_id'];
+    $data = array("table" => "node",
+        "method" => "add",
+        "data"=>array(
+            "name" => $name,
+            "type_id" => $type_id)
+    );
+}
+
+if (isset($_POST['Submit_node_delete'])) {
+
+    $id = $_POST['id'];
+
+    $data = array("table" => "node",
+        "method" => "delete",
+        "data"=>array(
+            "id" => $id)
+    );
+}
+
+if (isset($_POST['Submit_node_update'])) {
+
+
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $type_id = $_POST['type_id'];
+
+    $data = array("table" => "node",
+        "method" => "update",
+        "data"=>array(
+            "id" => $id,
+            "(name,type_id)" => $name . "," . $type_id)
+    );
+}
+if (isset($_POST['Submit_node_read'])) {
+
+    $field = $_POST['field'];
+
+    $data = array("table" => "node",
+        "method" => "read",
+        "data"=>array(
+            "field" => $field
+        )
+    );
+}
+$data=json_encode($data)."\n";
+//send($data);
+
+?>
 <div class="col-lg-6">
 <form name="node_add" method="post">
     <h3>Add</h3>
