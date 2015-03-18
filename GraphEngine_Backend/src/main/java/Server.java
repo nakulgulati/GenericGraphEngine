@@ -30,6 +30,7 @@ public class Server {
     }
 
     public void run(){
+        System.out.println("Server Running...");
 
         openServerSocket();
         while(!isStopped()){
@@ -60,6 +61,7 @@ public class Server {
 
         @Override
         public void run() {
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
 
             System.out.println("Client Accepted");
             try {
@@ -80,6 +82,7 @@ public class Server {
                 output.close();
                 input.close();
                 System.out.println("Request processed: " + time);
+                Base.close();
             } catch (Exception e) {
                 //report exception somewhere.
                 e.printStackTrace();
@@ -89,7 +92,7 @@ public class Server {
     }
 
     public static void main(String[] args){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
+
 
         Server server = new Server(8090);
         server.run();

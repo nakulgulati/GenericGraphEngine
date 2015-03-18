@@ -35,7 +35,7 @@ public class Process {
         this.model = model;
     }
 
-    public synchronized String operateCRUD(){
+    public String operateCRUD(){
 
         String operation = json.get("operation").toString();
         JSONObject data = json.getJSONObject("data");

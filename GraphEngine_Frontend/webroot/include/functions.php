@@ -9,7 +9,7 @@ function sendRequest($data){
 
     socket_write($socket, $data, strlen($data)) or die("Could not send data to server\n");
 
-    $result = socket_read ($socket, 2048) or die("Could not read server response\n");
+    $result = socket_read ($socket, 2048*5) or die("Could not read server response\n");
 
     socket_close($socket);
     return $result;
@@ -39,7 +39,9 @@ function processForm($postArray){
                 $request_data['data'][$key] = $value;
         }
 
-        return json_encode($request_data);
+        $request_data = json_encode($request_data)."\n";
+
+        return $request_data;
     }
 }
 

@@ -30,7 +30,7 @@ public class Type extends TableModel {
         * handle exceptions
         */
         Type type = new Type();
-        type.set("name", params.getString("name"));
+        type.set("name", params.get("name").toString());
         return type.saveIt();
     }
 

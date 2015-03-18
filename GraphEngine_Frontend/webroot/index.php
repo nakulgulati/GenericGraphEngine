@@ -60,7 +60,7 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-default" name="submit_type_add">Submit</button>
+                        <button type="submit" class="btn btn-default" name="submit_type_create">Submit</button>
                     </form>
 
                 </div>
@@ -106,7 +106,7 @@
                             <h3>Read</h3>
                             <div class="form-group">
                                 <label for="field">Field</label>
-                                <input type="text" class="form-control" name="id" placeholder="Enter Field">
+                                <input type="text" class="form-control" name="field" placeholder="Enter Field">
                             </div>
 
 
@@ -130,7 +130,7 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-default" name="submit_node_add">Submit</button>
+                        <button type="submit" class="btn btn-default" name="submit_node_create">Submit</button>
                     </form>
                 </div>
 
@@ -205,7 +205,7 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-default" name="submit_edge_add">Submit</button>
+                        <button type="submit" class="btn btn-default" name="submit_edge_create">Submit</button>
                     </form>
                 </div>
                 <!--
@@ -282,10 +282,17 @@
     </div>
 
 <?php
+if(isset($_POST)){
+    foreach($_POST as $key => $value){
+        if(preg_match("/submit_(\\w+)/",$key)){
+            $request_data = processForm($_POST);
+            $response = sendRequest($request_data);
+            print_r($response);
 
-    $request_data = processForm($_POST);
-    /*TODO
-    send request to server*/
+        }
+    }
+}
+
 ?>
 
 <?php require_once('include/footer.php'); ?>
