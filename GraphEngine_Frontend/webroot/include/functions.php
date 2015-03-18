@@ -2,7 +2,7 @@
 
 require_once('constants.php');
 
-function send($data){
+function sendRequest($data){
 
     $socket= socket_create(AF_INET,SOCK_STREAM,0) or die("Could not create socket\n");
     $result = socket_connect($socket, SERVER_IP, SERVER_PORT) or die("Could not connect to server\n");
@@ -13,6 +13,34 @@ function send($data){
 
     socket_close($socket);
     return $result;
+}
+
+function processForm($postArray){
+    $submit = null;
+
+    if(isset($postArray)){
+        foreach($postArray as $key => $value){
+            if(preg_match("/submit_(\\w+)/",$key)){
+                $submit = $key;
+                break;
+            }
+        }
+
+        $arr = explode("_",$submit);
+
+        $request_data = array(
+            "table" => $arr[1],
+            "operation" => $arr[2],
+            "data" => array()
+        );
+
+        foreach($postArray as $key => $value){
+            if(!preg_match("/submit_(\\w+)/",$key))
+                $request_data['data'][$key] = $value;
+        }
+
+        return json_encode($request_data);
+    }
 }
 
 function display($result,$table)
