@@ -1,13 +1,13 @@
 <?php
 
-if ($_POST) {
+/*if ($_POST) {
     if (isset ($_POST['Submit_main'])) {
         first();
     }
     if (isset($_POST['Submit_type_add']) || isset($_POST['Submit_type_delete']) || isset($_POST['Submit_type_update']) || isset($_POST['Submit_type_read']) || isset($_POST['Submit_edge_add']) || isset($_POST['Submit_edge_delete']) || isset($_POST['Submit_edge_update']) || isset($_POST['Submit_edge_read']) || (isset($_POST['Submit_node_add']) || isset($_POST['Submit_node_delete']) || isset($_POST['Submit_node_update']) || isset($_POST['Submit_node_read']))) {
         $data = input_data();
         $result = send($data);
-        display($result);
+        display($result,$table);
     } else {
         print("Submit Failed!");
     }
@@ -193,10 +193,9 @@ function input_data()
 
         $data = json_encode($data) . "\n";
 
-
         return $data;
 
-}
+}*/
 
 function send($data){
     $service_port = 8090;
@@ -213,7 +212,7 @@ function send($data){
     socket_close($socket);
     return $result;
 }
-function first()
+/*function first()
 {
     if (isset($_POST['Submit_main'])) {
 
@@ -231,30 +230,15 @@ function first()
 
     }
 
-}
+}*/
 
-function display($result)
+function display($result,$table)
 {
-    $result = '[{
-    "id":1,
-    "name":"A",
-    "type_id":"3"
-  },
-  {
-    "id":2,
-    "name":"B"
-  },
-  {
-    "id":3,
-    "name":"C"
-  }]';
-
     $array = json_decode($result, true);
 
-
-    echo "List" . "<BR>" . "<BR>";
-    foreach ($array as $ele => $jsons) {
-        foreach ($jsons as $ele => $value) {
+    echo "List ".$table."<BR>" . "<BR>";
+    foreach ($array as $ele => $item) {
+        foreach ($item as $ele => $value) {
             echo $ele . " " . $value . " ";
         }
         echo "<BR>";
