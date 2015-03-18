@@ -40,11 +40,12 @@ public class Test {
                 "\"table\" : \"edge\",\n" +
                 "\"operation\" : \"delete\",\n" +
                 "\"data\" : {" +
-                "id : 13" +
+                "from_id : 1," +
+                "to_id : 2," +
                 "}" +
                 "}";
 
-        String response = new Process(u).operateCRUD();
+        String response = new Process(d).operateCRUD();
         System.out.println(response);
 
 

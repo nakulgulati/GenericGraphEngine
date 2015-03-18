@@ -64,7 +64,9 @@ public class Edge extends TableModel {
             edge = Edge.findById(Integer.parseInt(params.get("id").toString()));
         }
         else if(params.has("from_id") && params.has("to_id")){
-            edge= Edge.findById(Integer.parseInt(params.get("from_id").toString(),Integer.parseInt(params.get("to_id").toString())));
+            int from_id = Integer.parseInt(params.get("from_id").toString());
+            int to_id = Integer.parseInt(params.get("to_id").toString());
+            edge = Edge.findFirst("from_id = ? and to_id = ?", from_id, to_id);
         }
         if(edge== null){
             return false;
