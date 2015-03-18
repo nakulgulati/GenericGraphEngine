@@ -1,41 +1,56 @@
-<?php require_once('includes/header.php'); ?>
-<?php require_once'includes/functions.php'; ?>
-<div>
+<?php require("includes/header.php");
+require("includes/functions.php");
+?>
+<div class="col-lg-6">
+<form name="type_add" method="post" action="">
     <h3>Add</h3>
-<Form name ="type_add" Method ="POST"  >
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter Type Name">
+    </div>
 
-    <INPUT TYPE = "TEXT" VALUE ="name" Name ="name">
 
-    <INPUT TYPE = "Submit" Name = "Submit_type_add" VALUE = "Submit" >
-
-</FORM>
-</div>
-<div>
+    <button type="submit" class="btn btn-default" name="Submit_type_add">Submit</button>
+</form>
+<hr>
+<form name="type_delete" method="post">
     <h3>Delete</h3>
-<Form name ="type_delete" Method ="POST" Action ="test.php">
+    <div class="form-group">
+        <label for="id">ID</label>
+        <input type="text" class="form-control" id="id" placeholder="Enter ID">
+    </div>
 
-    <INPUT TYPE = "TEXT" VALUE ="id" Name ="id">
-    <INPUT TYPE = "Submit" Name = "Submit_type_delete" VALUE = "Submit">
 
-</FORM>
-</div>
-<div>
-    <h3>UPDATE</h3>
-<Form name ="type_update" Method ="POST" Action ="test.php">
-    <INPUT TYPE = "TEXT" VALUE ="id" Name ="id">
-    <INPUT TYPE = "TEXT" VALUE ="name" Name ="name">
-    <INPUT TYPE = "Submit" Name = "Submit_type_update" VALUE = "Submit">
+    <button type="submit" class="btn btn-default" name="Submit_type_delete">Submit</button>
+</form>
+<hr>
+<form name="type_update" method="post">
+    <h3>Update</h3>
+    <div class="form-group">
+        <label for="name">ID</label>
+        <input type="text" class="form-control" id="id" placeholder="Enter ID">
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter Type Name">
+    </div>
 
-</FORM>
-</div>
-<div>
+
+    <button type="submit" class="btn btn-default" name="Submit_type_update">Submit</button>
+</form>
+<hr>
+<form name="type_read" method="post">
     <h3>Read</h3>
-<Form name ="type_read">
+    <div class="form-group">
+        <label for="field">Field</label>
+        <input type="text" class="form-control" id="id" placeholder="Enter Field">
+    </div>
 
-    <INPUT TYPE = "TEXT" VALUE ="field" Name ="field">
 
-    <INPUT TYPE = "button" Name = "Submit_type_read" VALUE = "Submit " onClick="test()">
+    <button type="submit" class="btn btn-default" name="Submit_type_read">Submit</button>
+</form>
+<hr>
+    </div>
 
-</FORM>
-</div>
-<?php require_once('includes/footer.php'); ?>
+<?php require("includes/footer.php")
+?>
