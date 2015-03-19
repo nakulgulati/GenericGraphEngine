@@ -18,11 +18,8 @@
     {
         if (e.target !== e.currentTarget) {
             var li = $(this).attr("value");
-            if(li == 'type_add'){
-                console.log("true");
-            }
-            //console.log($("#type_add"));
-            $("form[name=li]").fadeIn();
+            onStart();
+            $('form[name="' + li + '"]').fadeIn();
         }
         e.stopPropagation();
     }
