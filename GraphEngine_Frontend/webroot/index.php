@@ -14,8 +14,8 @@
                                 <ul >
                                     <li value="type_add"><a href="#">Add</a></li>
                                     <li value="type_delete"><a href="#">Delete</a></li>
-                                    <li ><a href="#">Update</a></li>
-                                    <li><a href="#">Read</a></li>
+                                    <li value="type_update"><a href="#">Update</a></li>
+                                    <li value="type_read"><a href="#">Read</a></li>
                                 </ul>
                             </div>
                         </div></li>
@@ -23,10 +23,10 @@
                         <div class="collapse" id="node">
                             <div class="well">
                                 <ul>
-                                    <li><a href="#">Add</a></li>
-                                    <li><a href="#">Delete</a></li>
-                                    <li><a href="#">Update</a></li>
-                                    <li><a href="#">Read</a></li>
+                                    <li value="node_add"><a href="#">Add</a></li>
+                                    <li value="node_delete"><a href="#">Delete</a></li>
+                                    <li value="node_update"><a href="#">Update</a></li>
+                                    <li value="node_read"><a href="#">Read</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -35,10 +35,10 @@
                         <div class="collapse" id="edge">
                             <div class="well">
                                 <ul >
-                                    <li><a href="#">Add</a></li>
-                                    <li><a href="#">Delete</a></li>
-                                    <li><a href="#">Update</a></li>
-                                    <li><a href="#">Read</a></li>
+                                    <li value="edge_add"><a href="#">Add</a></li>
+                                    <li value="edge_delete"><a href="#">Delete</a></li>
+                                    <li value="edge_update"><a href="#">Update</a></li>
+                                    <li value="edge_read"><a href="#">Read</a></li>
                                 </ul>
                             </div>
                         </div></li>
@@ -177,7 +177,7 @@
                 Node Read
                 -->
                 <div>
-                    <form name="node_read" method="post">
+                    <form name="node_read" method="post" class="col-lg-4">
                         <h3>Read</h3>
                         <div class="form-group">
                             <label for="id">Field</label>
