@@ -30,7 +30,7 @@ if(isset($_POST)){
 
 ?>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-lg-3" >
                 <h1>Menu</h1>
@@ -290,22 +290,25 @@ if(isset($_POST)){
             <!--
                 Edge Read
             -->
-            <div class="row">
-                <form class="col-lg-4" id="edge_read" name="edge_read" method="post">
-                    <h3>Read</h3>
-                    <div class="form-group">
-                        <label for="from_id">From ID</label>
-                        <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
-                    </div>
-                    <div class="form-group">
-                        <label for="field">Field</label>
-                        <input type="text" class="form-control" name="field" placeholder="Enter Field">
-                    </div>
+                <div class="row">
+                    <form class="col-lg-4" id="edge_read" name="edge_read" method="post">
+                        <h3>Read</h3>
+                        <div class="form-group">
+                            <label for="from_id">From ID</label>
+                            <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="field">Field</label>
+                            <input type="text" class="form-control" name="field" placeholder="Enter Field">
+                        </div>
 
+                        <button type="submit" class="btn btn-default" name="submit_edge_read">Submit</button>
+                    </form>
+                </div>
 
-                    <button type="submit" class="btn btn-default" name="submit_edge_read">Submit</button>
-                </form>
-            </div>
+                <div class="row" id="sigmaTest">
+
+                </div>
             </div>
         </div>
     </div>
