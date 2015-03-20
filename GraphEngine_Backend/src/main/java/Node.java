@@ -27,25 +27,28 @@ public class Node extends TableModel {
     }
 
     @Override
-    public boolean add(JSONObject params) {
+    public LazyList<TableModel> add(JSONObject params) {
+        LazyList<TableModel> modelList = null;
         String name = params.get("name").toString();
         int type_id = Integer.parseInt(params.get("type_id").toString());
         Node node= new Node();
         node.set("name", "'"+name+"'" );
-        return node.saveIt();
+        node.saveIt();
+        modelList.add(node);
+        return modelList;
     }
 
     @Override
-    public boolean update(JSONObject params) {
+    public LazyList<TableModel> update(JSONObject params) {
         int id = Integer.parseInt(params.get("id").toString());
-
+        LazyList<TableModel> modelList = null;
         Node node ;
         node = Node.findById(id);
         if(node == null){
-            return false;
+            return null;
         }
         if(!params.has("name") && !params.has("type_id")){
-            return false;
+            return null;
         }
         if(params.has("name")){
             node.set("name",params.get("name").toString());
@@ -54,7 +57,9 @@ public class Node extends TableModel {
             node.set("type_id", params.get("type_id").toString());
         }
 
-        return node.saveIt();
+        node.saveIt();
+        modelList.add(node);
+        return modelList;
     }
 
     @Override

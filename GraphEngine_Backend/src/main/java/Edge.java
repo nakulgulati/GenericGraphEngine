@@ -20,24 +20,25 @@ public class Edge extends TableModel {
     }
 
     @Override
-    public boolean add(JSONObject params) {
-
+    public LazyList<TableModel> add(JSONObject params) {
+        LazyList<TableModel> modelList = null;
         if(!params.has("from_id") || !params.has("to_id")){
-            return false;
+            return null;
         }
         Edge edge = new Edge();
         edge.set("from_id",Integer.parseInt(params.get("from_id").toString())).set("to_id",Integer.parseInt(params.get("to_id").toString()));
 
-        return edge.saveIt();
-
+        edge.saveIt();
+        modelList.add(edge);
+        return modelList;
     }
 
     @Override
-    public boolean update(JSONObject params) {
+    public LazyList<TableModel> update(JSONObject params) {
 
+        LazyList<TableModel> modelList = null;
         Edge edge = new Edge();
         int to_id;
-
         if(params.has("id")){
             edge = Edge.findById(Integer.parseInt(params.get("id").toString()));
         }
@@ -47,14 +48,14 @@ public class Edge extends TableModel {
             edge = Edge.findFirst("from_id = ? and to_id = ?", from_id, to_id);
         }
         if(edge == null){
-            return false;
+            return null;
         }
 
         to_id = Integer.parseInt(params.get("to_id_new").toString());
         edge.set("to_id", to_id);
-
-       return edge.saveIt();
-
+        edge.saveIt();
+        modelList.add(edge);
+        return modelList;
     }
 
     @Override
