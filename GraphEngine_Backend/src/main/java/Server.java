@@ -61,6 +61,8 @@ public class Server {
 
         @Override
         public void run() {
+            /*TODO
+            * find a place to open connection that is available to all threads*/
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
 
             System.out.println("Client Accepted");
