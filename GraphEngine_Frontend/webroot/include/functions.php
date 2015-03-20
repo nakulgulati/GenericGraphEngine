@@ -45,15 +45,43 @@ function processForm($postArray){
     }
 }
 
-function display($result,$table)
+function display($result,$table,$operation)
 {
-    $array = json_decode($result, true);
+    printf($table);
+    printf($operation);
+    if($operation!="delete") {
+        $array = json_decode($result, true);
 
-    echo "List ".$table."<BR>" . "<BR>";
-    foreach ($array as $ele => $item) {
-        foreach ($item as $ele => $value) {
-            echo $ele . " " . $value . " ";
+
+        echo("<table border='1'>");
+
+        echo "<th>" . "Id" . "</th>";
+
+        if($table!="edge")
+            echo "<th>" . "Name" . "</th>";
+        if($table=="node")
+            echo "<th>" . "Type_Id" . "</th>";
+        if($table=="edge")
+        {
+            echo "<th>" . "From_Id" . "</th>";
+            echo "<th>" . "To_Id" . "</th>";
         }
-        echo "<BR>";
+
+
+        foreach ($array as $ele => $item) {
+
+            echo("<tr>");
+            foreach ($item as $ele => $value) {
+
+                echo "<td>" . $value . "</td>";
+
+            }
+
+            echo("<br></tr>");
+        }
+        echo("</table><br><br>");
+
     }
+    else
+        printf($result);
 }

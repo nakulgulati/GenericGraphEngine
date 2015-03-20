@@ -4,10 +4,25 @@
 <?php
 if(isset($_POST)){
     foreach($_POST as $key => $value){
+
         if(preg_match("/submit_(\\w+)/",$key)){
             $request_data = processForm($_POST);
-            $response = sendRequest($request_data);
-            print_r($response);
+           // $response = sendRequest($request_data);
+            $response='[
+  {
+      "id":1,
+    "name":"A"
+  },
+  {
+      "id":2,
+    "name":"B"
+  },
+  {
+      "id":3,
+    "name":"C"
+  }]';
+            $arr = explode("_",$key);
+           display($response,$arr[1],$arr[2]);
 
         }
     }

@@ -25,6 +25,10 @@
         e.stopPropagation();
     }
 
+    function display()
+    {
+        alert("hello world");
+    }
 </script>
 
 </body>
