@@ -1,6 +1,20 @@
 <?php require_once('include/functions.php'); ?>
 <?php require_once('include/header.php'); ?>
 
+<?php
+if(isset($_POST)){
+    foreach($_POST as $key => $value){
+        if(preg_match("/submit_(\\w+)/",$key)){
+            $request_data = processForm($_POST);
+            $response = sendRequest($request_data);
+            print_r($response);
+
+        }
+    }
+}
+
+?>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3" >
@@ -280,19 +294,5 @@
             </div>
         </div>
     </div>
-
-<?php
-if(isset($_POST)){
-    foreach($_POST as $key => $value){
-        if(preg_match("/submit_(\\w+)/",$key)){
-            $request_data = processForm($_POST);
-            $response = sendRequest($request_data);
-            print_r($response);
-
-        }
-    }
-}
-
-?>
 
 <?php require_once('include/footer.php'); ?>

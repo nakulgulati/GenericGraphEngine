@@ -57,5 +57,3 @@ function display($result,$table)
         echo "<BR>";
     }
 }
-
-?>
