@@ -1,6 +1,8 @@
 import org.javalite.activejdbc.LazyList;
+import org.javalite.activejdbc.annotations.BelongsTo;
 import org.json.JSONObject;
 
+@BelongsTo(parent = Node.class, foreignKeyName = "from_id")
 public class Edge extends TableModel {
 
     @Override
@@ -75,4 +77,23 @@ public class Edge extends TableModel {
         return true;
     }
 
+    public LazyList<TableModel> getEntityAssociations(JSONObject params){
+        LazyList<Edge> associationList = null;
+        /*$query = "SELECT edges.to_id, vertices.name FROM edges INNER JOIN vertices ON edges.to_id = vertices.id WHERE vertices.type = '{$type}';";*/
+
+        /*TODO
+        find better way implement this query*/
+        if(params.has("type_id")){
+            int type_id = Integer.parseInt(params.get("type_id").toString());
+            associationList = Edge.findBySQL("SELECT edges.from_id,edges.id,edges.to_id, nodes.name FROM edges INNER JOIN nodes ON edges.to_id = nodes.id WHERE nodes.type_id = "+type_id+"");
+        }
+
+        if(params.has("field")){
+            Node n = Node.findById(Integer.parseInt(params.get("from_id").toString()));
+            associationList = n.getAll(Edge.class);
+        }
+
+        return (LazyList)associationList;
     }
+
+}

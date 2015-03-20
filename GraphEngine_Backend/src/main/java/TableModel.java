@@ -20,4 +20,8 @@ public class TableModel extends Model {
         return false;
     }
 
+    public LazyList getEntityAssociations(JSONObject params){
+        return null;
+    }
+
 }

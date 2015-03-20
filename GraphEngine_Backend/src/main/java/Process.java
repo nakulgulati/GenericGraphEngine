@@ -54,6 +54,9 @@ public class Process {
             case "delete":
                 response = model.remove(data);
                 break;
+            case "associations":
+                response = model.getEntityAssociations(data).toJson(true);
+                break;
         }
 
         return response.toString();
