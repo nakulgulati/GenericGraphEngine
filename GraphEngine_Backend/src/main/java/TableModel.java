@@ -8,12 +8,12 @@ public class TableModel extends Model {
         return null;
     }
 
-    public boolean add(JSONObject params){
-       return false;
+    public LazyList<TableModel> add(JSONObject params){
+       return null;
     }
 
-    public boolean update(JSONObject params){
-        return false;
+    public LazyList<TableModel> update(JSONObject params){
+        return null;
     }
 
     public boolean remove(JSONObject params){

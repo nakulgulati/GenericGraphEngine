@@ -43,13 +43,19 @@ public class Process {
 
         switch (operation){
             case "create":
-                response = model.add(data);
+                response = model.add(data).toJson(true);
+                if(response==null)
+                    response =false;
                 break;
             case "read":
                 response = model.read(data).toJson(true);
+                if(response==null)
+                    response =false;
                 break;
             case "update":
                 response = model.update(data);
+                if(response==null)
+                    response =false;
                 break;
             case "delete":
                 response = model.remove(data);

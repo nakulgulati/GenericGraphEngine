@@ -25,24 +25,33 @@ public class Type extends TableModel {
     }
 
     @Override
-    public boolean add(JSONObject params) {
+    public LazyList<TableModel> add(JSONObject params) {
         /*TODO
         * handle exceptions
         */
+        LazyList<TableModel> modelList = null;
         Type type = new Type();
         type.set("name", params.get("name").toString());
-        return type.saveIt();
+        type.saveIt();
+        modelList.add(type);
+        return modelList;
+
     }
 
     @Override
-    public boolean update(JSONObject params) {
+    public LazyList<TableModel> update(JSONObject params) {
         /*TODO
         * handle exceptions
         */
+        LazyList<TableModel> modelList = null;
         int id = Integer.parseInt(params.get("id").toString());
         Type type = Type.findById(id);
-        return type != null && type.set("name", params.get("name").toString()).saveIt();
-
+        if(type== null){
+            return null;
+        }
+        type.set("name", params.get("name").toString()).saveIt();
+        modelList.add(type);
+        return modelList;
     }
 
     @Override
