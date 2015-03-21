@@ -32,9 +32,10 @@ public class Node extends TableModel{
         String name = params.get("name").toString();
         int type_id = Integer.parseInt(params.get("type_id").toString());
         Node node = new Node();
-        node.set("name", "'" + name + "'");
+        node.set("name", "'" + name + "'").set("type_id",type_id);
         node.saveIt();
-        modelList.add(node);
+        long id = (long) node.getId();
+        modelList = find("id =?",id);
         return modelList;
     }
 
