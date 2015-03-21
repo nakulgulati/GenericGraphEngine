@@ -1,34 +1,10 @@
 function hideForms() {
     $("form").hide();
 }
-/*function hideTextFields() {
-    $("#id ").hide();
-
-
-}*/
 
 $(document).ready(hideForms());
 
 $("li.master").find("ul").find("li").click(displaySelectedForm);
-//$(".dropdown").find("ul").find("li").click(displayTextField);
-/*
-function displayTextField(e)
-{
-    if(e.target!== e.currentTarget) {
-        var li = $(this).attr("value");
-
-        $('label[id="' + li + '"]').show();
-        $('input[id="' + li + '"]').show();
-
-
-    }
-    else
-    {
-        hideTextFields();
-    }
-    e.stopPropagation();
-}
-*/
 
 function displaySelectedForm(e) {
     if (e.target !== e.currentTarget) {
@@ -85,12 +61,4 @@ function displayEntityAssociationGraph(json_response) {
             defaultNodeColor: '#ec5148'
         }
     });
-}
-
-
-function hideAssociation(e)
-{
-    var li = $(this).attr("value");
-
-
 }

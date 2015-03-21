@@ -32,7 +32,5 @@ displayEntityAssociationGraph(response);
 
 ?>
 
-
-
 </body>
 </html>
