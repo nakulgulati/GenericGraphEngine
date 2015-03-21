@@ -1,0 +1,90 @@
+
+#sigmaTest {
+    max-width: inherit;
+    height: 600px;
+    margin: auto;
+}
+
+/*.container-fluid
+{
+    background: #52B3D9;
+
+}*/
+#home:hover
+{
+    text-decoration: none;
+    background-color: transparent;
+    opacity: 1.0;
+    outline: 0;
+}
+#title
+{   padding-left: 10px;
+    font-family: "Authentic Ratatouille";
+    color: black;
+    font-size: 64px;
+
+}
+.nav>li>a{
+    border-radius: 10px;
+}
+.nav>li>a:hover,
+.nav > li > a:focus
+{
+    background-color: #F2F1EF;
+    outline: 0;
+}
+.well
+{
+    background-color: #F2F1EF;
+    border-radius:10px;
+
+}
+.col-lg-9
+{
+    display: block;
+
+
+}
+.col-lg-9,.col-lg-3
+{
+    padding-top: 10px;
+}
+.master>a
+{
+    color: black;
+    font-size: 20px;
+    text-decoration:none;
+    font-family: "Annexxus_Demo";
+    outline: 0;
+}
+.well>ul
+{
+    list-style: none;
+
+}
+.well>ul>li>a
+{
+    text-decoration: none;
+    color:black;
+    font-family: "Annexxus_Demo";
+    font-size:16px;
+    outline: 0;
+}
+form {
+
+    border-radius: 15px;
+    padding-bottom: 10px;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 2px #222;
+    display: block;
+}
+h1
+{
+    font-family: "Helvetica";
+
+
+}
+#hide
+{
+    display:none;
+}

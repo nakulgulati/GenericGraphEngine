@@ -1,15 +1,12 @@
 import org.javalite.activejdbc.Base;
-import org.javalite.activejdbc.LazyList;
-import org.javalite.activejdbc.Model;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+public class Server{
 
-    protected int          serverPort   = 8080;
+    protected int serverPort = 8080;
     protected ServerSocket serverSocket = null;
     protected boolean isStopped = false;
 
@@ -17,10 +14,10 @@ public class Server {
         this.serverPort = port;
     }
 
-    private void openServerSocket() {
-        try {
+    private void openServerSocket(){
+        try{
             this.serverSocket = new ServerSocket(this.serverPort);
-        } catch (IOException e) {
+        } catch(IOException e){
             throw new RuntimeException("Cannot open port 8080", e);
         }
     }
@@ -35,11 +32,11 @@ public class Server {
         openServerSocket();
         while(!isStopped()){
             Socket clientSocket = null;
-            try {
+            try{
                 clientSocket = this.serverSocket.accept();
-            } catch (IOException e) {
-                if(isStopped()) {
-                    System.out.println("Server Stopped.") ;
+            } catch(IOException e){
+                if(isStopped()){
+                    System.out.println("Server Stopped.");
                     return;
                 }
                 throw new RuntimeException(
@@ -47,7 +44,7 @@ public class Server {
             }
             new Thread(new Worker(clientSocket)).start();
         }
-        System.out.println("Server Stopped.") ;
+        System.out.println("Server Stopped.");
     }
 
 
@@ -55,17 +52,19 @@ public class Server {
 
         protected Socket clientSocket = null;
 
-        public Worker(Socket clientSocket) {
+        public Worker(Socket clientSocket){
             this.clientSocket = clientSocket;
         }
 
         @Override
-        public void run() {
+        public void run(){
+            /*TODO
+            * find a place to open connection that is available to all threads*/
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_db", "root", "");
 
             System.out.println("Client Accepted");
-            try {
-                InputStream input  = clientSocket.getInputStream();
+            try{
+                InputStream input = clientSocket.getInputStream();
                 OutputStream output = clientSocket.getOutputStream();
                 long time = System.currentTimeMillis();
 
@@ -83,7 +82,7 @@ public class Server {
                 input.close();
                 System.out.println("Request processed: " + time);
                 Base.close();
-            } catch (Exception e) {
+            } catch(Exception e){
                 //report exception somewhere.
                 e.printStackTrace();
             }
