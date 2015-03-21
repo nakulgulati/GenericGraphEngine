@@ -45,7 +45,7 @@ function processForm($postArray){
     }
 }
 
-function display($result,$table)
+/*function display($result,$table)
 {
     $array = json_decode($result, true);
 
@@ -56,4 +56,45 @@ function display($result,$table)
         }
         echo "<BR>";
     }
+}*/
+
+function display($result,$table,$operation)
+{
+    printf($table);
+    printf($operation);
+    if($operation!="delete") {
+        $array = json_decode($result, true);
+
+
+        echo("<table border='1'>");
+
+        echo "<th>" . "Id" . "</th>";
+
+        if($table!="edge")
+            echo "<th>" . "Name" . "</th>";
+        if($table=="node")
+            echo "<th>" . "Type_Id" . "</th>";
+        if($table=="edge")
+        {
+            echo "<th>" . "From_Id" . "</th>";
+            echo "<th>" . "To_Id" . "</th>";
+        }
+
+
+        foreach ($array as $ele => $item) {
+
+            echo("<tr>");
+            foreach ($item as $ele => $value) {
+
+                echo "<td>" . $value . "</td>";
+
+            }
+
+            echo("<br></tr>");
+        }
+        echo("</table><br><br>");
+
+    }
+    else
+        printf($result);
 }
