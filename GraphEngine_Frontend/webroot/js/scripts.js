@@ -1,4 +1,4 @@
-function hideForms(){
+function hideForms() {
     $("form").hide();
 }
 
@@ -6,8 +6,7 @@ $(document).ready(hideForms());
 
 $("li.master").find("ul").find("li").click(displaySelectedForm);
 
-function displaySelectedForm(e)
-{
+function displaySelectedForm(e) {
     if (e.target !== e.currentTarget) {
         var li = $(this).attr("value");
         hideForms();
@@ -19,7 +18,7 @@ function displaySelectedForm(e)
 function displayEntityAssociationGraph(json_response) {
 
     /*TODO
-    * find a better way to implement this*/
+     * find a better way to implement this*/
     var nodeList = [];
 
     nodeList.push({

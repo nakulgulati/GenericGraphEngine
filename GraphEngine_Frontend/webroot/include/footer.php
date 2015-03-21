@@ -20,7 +20,7 @@ $request_data = array(
     )
 );
 
-$request_data = json_encode($request_data)."\n";
+$request_data = json_encode($request_data) . "\n";
 
 $response = sendRequest($request_data);
 
