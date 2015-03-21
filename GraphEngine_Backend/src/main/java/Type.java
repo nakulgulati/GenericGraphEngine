@@ -1,6 +1,9 @@
 import org.javalite.activejdbc.LazyList;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Type extends TableModel{
 
     @Override
@@ -29,11 +32,12 @@ public class Type extends TableModel{
         /*TODO
         * handle exceptions
         */
-        LazyList<TableModel> modelList = null;
+        LazyList<TableModel> modelList;
         Type type = new Type();
         type.set("name", params.get("name").toString());
         type.saveIt();
-        modelList.add(type);
+        long id = (long) type.getId();
+        modelList = Type.find("id = ?", id);
         return modelList;
 
     }
