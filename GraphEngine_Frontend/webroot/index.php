@@ -6,22 +6,7 @@ if(isset($_POST)){
     foreach($_POST as $key => $value){
         if(preg_match("/submit_(\\w+)/",$key)){
             $request_data = processForm($_POST);
-            //$response = sendRequest($request_data);
-            $response='[
-  {
-      "id":1,
-    "name":"A"
-  },
-  {
-      "id":2,
-    "name":"B"
-  },
-  {
-      "id":3,
-    "name":"C"
-  }]';
-            $arr = explode("_",$key);
-            display($response,$arr[1],$arr[2]);
+            $response = sendRequest($request_data);
             print_r($response);
 
         }
@@ -30,27 +15,25 @@ if(isset($_POST)){
 
 ?>
 
-    <div class="container-fluid">
-    <a id="home" href="index.php"><h1  id="title">Graph Engine</h1></a>
+    <div class="container">
         <div class="row">
-
             <div class="col-lg-3" >
-<!--                <h1>Menu</h1>-->
+                <h1>Menu</h1>
 
-                <ul class="nav nav-pills nav-stacked" id="menu">
+                <ul class="nav nav-pills nav-stacked">
 
-                    <li class="master"><a class="hoverExpand" data-toggle="collapse" href="#type" aria-expanded="false" aria-controls="type">Type</a>
+                    <li class="master"><a data-toggle="collapse" href="#type" aria-expanded="false" aria-controls="type">Type</a>
                         <div class="collapse" id="type">
                             <div class="well">
-                                <ul id="list">
-                                    <li  value="type_add"><a href="#">Add</a></li>
+                                <ul >
+                                    <li value="type_add"><a href="#">Add</a></li>
                                     <li value="type_delete"><a href="#">Delete</a></li>
                                     <li value="type_update"><a href="#">Update</a></li>
                                     <li value="type_read"><a href="#">Read</a></li>
                                 </ul>
                             </div>
                         </div></li>
-                    <li class="master"><a class="hoverExpand" data-toggle="collapse" href="#node" aria-expanded="false" aria-controls="node">Node</a>
+                    <li class="master"><a data-toggle="collapse" href="#node" aria-expanded="false" aria-controls="node">Node</a>
                         <div class="collapse" id="node">
                             <div class="well">
                                 <ul>
@@ -62,7 +45,7 @@ if(isset($_POST)){
                             </div>
                         </div>
                     </li>
-                    <li class="master"><a class="hoverExpand" data-toggle="collapse" href="#edge" aria-expanded="false" aria-controls="edge">Edge</a>
+                    <li class="master"><a data-toggle="collapse" href="#edge" aria-expanded="false" aria-controls="edge">Edge</a>
                         <div class="collapse" id="edge">
                             <div class="well">
                                 <ul >
@@ -70,16 +53,14 @@ if(isset($_POST)){
                                     <li value="edge_delete"><a href="#">Delete</a></li>
                                     <li value="edge_update"><a href="#">Update</a></li>
                                     <li value="edge_read"><a href="#">Read</a></li>
-                                    <li value="edge_association"><a href="#">Association</a></li>
                                 </ul>
                             </div>
                         </div></li>
-
                 </ul>
 
             </div>
             <div class="col-lg-9">
-<!--                <h1>Form/Output</h1>-->
+                <h1>Form/Output</h1>
 
                 <!--
                 Type Add
@@ -138,14 +119,9 @@ if(isset($_POST)){
                         <form id="type_read" class="col-lg-4" name="type_read" method="post">
                             <h3>Read</h3>
                             <div class="form-group">
-                                <label for="id">ID</label>
-                                <input type="text" class="form-control" name="ID" placeholder="Enter ID">
-                            </div>
-                            <div class="form-group">
                                 <label for="field">Field</label>
                                 <input type="text" class="form-control" name="field" placeholder="Enter Field">
                             </div>
-
 
 
                             <button type="submit" class="btn btn-default" name="submit_type_read">Submit</button>
@@ -198,18 +174,13 @@ if(isset($_POST)){
                             <label for="id">ID</label>
                             <input type="text" class="form-control" name="ID" placeholder="Enter ID">
                         </div>
-                        <select>
-                            <option value="name">Name</option>
-                            <option value="type_id">Type ID</option>
-                            <option value="both">Name and Type ID</option>
-                        </select>
                         <div class="form-group">
-                            <label for="name" id="hide">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name" id="hide">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name">
                         </div>
                         <div class="form-group">
-                            <label for="type_id" id="hide">Type ID</label>
-                            <input type="text" class="form-control" name="type_id" placeholder="Enter Type ID" id="hide">
+                            <label for="type_id">Type ID</label>
+                            <input type="text" class="form-control" name="type_id" placeholder="Enter Type ID">
                         </div>
 
 
@@ -222,11 +193,6 @@ if(isset($_POST)){
                 <div>
                     <form name="node_read" method="post" class="col-lg-4">
                         <h3>Read</h3>
-                        <select>
-                            <option value="field">Field</option>
-                            <option value="id">ID</option>
-                            <option value="type_id">Type ID</option>
-                        </select>
                         <div class="form-group">
                             <label for="id">Field</label>
                             <input type="text" class="form-control" name="field" placeholder="Enter Field">
@@ -262,19 +228,15 @@ if(isset($_POST)){
                 <div class="row">
                     <form class="col-lg-4" id="edge_delete" name="edge_delete" method="post">
                         <h3>Delete</h3>
-                        <select>
-                            <option value="id">ID</option>
-                            <option value="from_id">To and From ID</option>
-                        </select>
                         <div class="form-group">
                             <label for="id">ID</label>
-                            <input type="text" class="form-control" name="id" placeholder="Enter ID" >
+                            <input type="text" class="form-control" name="id" placeholder="Enter ID">
                         </div>
-                        <div class="form-group" >
+                        <div class="form-group">
                             <label for="from_id">From ID</label>
                             <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
                         </div>
-                        <div class="form-group" >
+                        <div class="form-group">
                             <label for="to_id">To ID</label>
                             <input type="text" class="form-control" name="to_id" placeholder="Enter To ID">
                         </div>
@@ -289,11 +251,6 @@ if(isset($_POST)){
                 <div class="row">
                     <form class="col-lg-4" id="edge_update" name="edge_update" method="post">
                         <h3>Update</h3>
-                        <select>
-                            <option value="id">ID</option>
-                            <option value="type_id">From ID,To ID,New To ID</option>
-
-                        </select>
                         <div class="form-group">
                             <label for="id">ID</label>
                             <input type="text" class="form-control" name="id" placeholder="Enter ID">
@@ -321,11 +278,6 @@ if(isset($_POST)){
                 <div class="row">
                     <form class="col-lg-4" id="edge_read" name="edge_read" method="post">
                         <h3>Read</h3>
-                        <select>
-                            <option value="from_id">From ID</option>
-                            <option value="field">Field</option>
-
-                        </select>
                         <div class="form-group">
                             <label for="from_id">From ID</label>
                             <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
@@ -338,34 +290,6 @@ if(isset($_POST)){
                         <button type="submit" class="btn btn-default" name="submit_edge_read">Submit</button>
                     </form>
                 </div>
-            <!--Edge Associations
-            -->
-            <div class="row">
-                <form class="col-lg-4" id="edge_association" name="edge_association" method="post">
-                    <h3>Associations</h3>
-                    <div class="form-group">
-                        <label for="from_id">From ID</label>
-                        <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
-                    </div>
-                    <select >
-                        <option value="type_id"> Type ID</option>
-                        <option value="field">Field</option>
-                    </select>
-                   <div class="form-group">
-                        <label for="type_id"  name="type_id">Type ID</label>
-                        <input type="text" class="form-control" name="type_id" placeholder="Enter Type ID">
-                    </div>
-                    <div class="form-group">
-                        <label for="field"  name="field">Field</label>
-                        <input type="text" class="form-control" name="field"  placeholder="Enter Field">
-
-                    </div>
-
-
-                    <button type="submit" class="btn btn-default" name="submit_edge_association">Submit</button>
-                </form>
-
-            </div>
 
                 <div class="row" id="sigmaTest">
 
@@ -373,8 +297,5 @@ if(isset($_POST)){
             </div>
         </div>
     </div>
-
-
-
 
 <?php require_once('include/footer.php'); ?>
