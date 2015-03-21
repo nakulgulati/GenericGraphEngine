@@ -1,16 +1,16 @@
 import org.javalite.activejdbc.LazyList;
 import org.json.JSONObject;
 
-public class Node extends TableModel {
+public class Node extends TableModel{
     @Override
-    public LazyList<TableModel> read(JSONObject params) {
+    public LazyList<TableModel> read(JSONObject params){
         String args;
         LazyList<TableModel> modelList = null;
         Node node;
-        if(params.has("id")) {
-            args= params.get("id").toString();
+        if(params.has("id")){
+            args = params.get("id").toString();
             node = Node.findById(Integer.parseInt(args));
-            if (node != null) {
+            if(node != null){
                 modelList = Node.find("id = ?", args);
             }
         }
@@ -19,30 +19,30 @@ public class Node extends TableModel {
         }
 
         if(params.has("type_id")){
-            args= params.get("type_id").toString();
-            modelList = Node.find("type_id = ?", (Integer.parseInt(args)) );
+            args = params.get("type_id").toString();
+            modelList = Node.find("type_id = ?", (Integer.parseInt(args)));
         }
 
         return modelList;
     }
 
     @Override
-    public LazyList<TableModel> add(JSONObject params) {
+    public LazyList<TableModel> add(JSONObject params){
         LazyList<TableModel> modelList = null;
         String name = params.get("name").toString();
         int type_id = Integer.parseInt(params.get("type_id").toString());
-        Node node= new Node();
-        node.set("name", "'"+name+"'" );
+        Node node = new Node();
+        node.set("name", "'" + name + "'");
         node.saveIt();
         modelList.add(node);
         return modelList;
     }
 
     @Override
-    public LazyList<TableModel> update(JSONObject params) {
+    public LazyList<TableModel> update(JSONObject params){
         int id = Integer.parseInt(params.get("id").toString());
         LazyList<TableModel> modelList = null;
-        Node node ;
+        Node node;
         node = Node.findById(id);
         if(node == null){
             return null;
@@ -51,8 +51,8 @@ public class Node extends TableModel {
             return null;
         }
         if(params.has("name")){
-            node.set("name",params.get("name").toString());
-         }
+            node.set("name", params.get("name").toString());
+        }
         if(params.has("type_id")){
             node.set("type_id", params.get("type_id").toString());
         }
@@ -63,11 +63,11 @@ public class Node extends TableModel {
     }
 
     @Override
-    public boolean remove(JSONObject params) {
+    public boolean remove(JSONObject params){
         int id = Integer.parseInt(params.get("id").toString());
         Node node;
-        node = Node.findFirst("id = ?",id);
-        if (node==null){
+        node = Node.findFirst("id = ?", id);
+        if(node == null){
             return false;
         }
         node.deleteCascade();

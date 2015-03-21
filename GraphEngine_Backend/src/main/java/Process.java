@@ -1,6 +1,6 @@
 import org.json.JSONObject;
 
-public class Process {
+public class Process{
 
     protected String request_string = null;
     protected JSONObject json = null;
@@ -20,7 +20,7 @@ public class Process {
         TableModel model = null;
         String table = json.get("table").toString();
 
-        switch (table){
+        switch(table){
             case "node":
                 model = new Node();
                 break;
@@ -41,21 +41,21 @@ public class Process {
         JSONObject data = json.getJSONObject("data");
         Object response = null;
 
-        switch (operation){
+        switch(operation){
             case "create":
                 response = model.add(data).toJson(true);
-                if(response==null)
-                    response =false;
+                if(response == null)
+                    response = false;
                 break;
             case "read":
                 response = model.read(data).toJson(true);
-                if(response==null)
-                    response =false;
+                if(response == null)
+                    response = false;
                 break;
             case "update":
                 response = model.update(data);
-                if(response==null)
-                    response =false;
+                if(response == null)
+                    response = false;
                 break;
             case "delete":
                 response = model.remove(data);
