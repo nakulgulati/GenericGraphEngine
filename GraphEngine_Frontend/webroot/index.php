@@ -8,20 +8,7 @@ if(isset($_POST)){
 
         if(preg_match("/submit_(\\w+)/", $key)){
             $request_data = processForm($_POST);
-            // $response = sendRequest($request_data);
-            $response = '[
-  {
-      "id":1,
-    "name":"A"
-  },
-  {
-      "id":2,
-    "name":"B"
-  },
-  {
-      "id":3,
-    "name":"C"
-  }]';
+            $response = sendRequest($request_data);
             $arr = explode("_", $key);
 
         }
@@ -201,7 +188,7 @@ if(isset($_POST)){
 
                         <div class="form-group">
                             <label for="id">ID</label>
-                            <input type="text" class="form-control" name="ID" placeholder="Enter ID">
+                            <input type="text" class="form-control" name="id" placeholder="Enter ID">
                         </div>
                         <div class="form-group">
                             <label for="name">Name</label>

@@ -46,15 +46,17 @@ public class Type extends TableModel{
     public LazyList<TableModel> update(JSONObject params){
         /*TODO
         * handle exceptions
+        * change
         */
-        LazyList<TableModel> modelList = null;
+        LazyList<TableModel> modelList;
         int id = Integer.parseInt(params.get("id").toString());
         Type type = Type.findById(id);
         if(type == null){
             return null;
         }
         type.set("name", params.get("name").toString()).saveIt();
-        modelList.add(type);
+        long lastupdatedId =(long) type.getId();
+        modelList = find("id=?", lastupdatedId);
         return modelList;
     }
 
