@@ -5,7 +5,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/sigma.min.js"></script>
 <!--custom scripts-->
-<!--<script src="js/scripts.js"></script>-->
+<script src="js/scripts.js"></script>
 
 <script src="js/plugins/sigma.parsers.json.min.js"></script>
 

@@ -12,31 +12,26 @@ $typeList = json_decode(sendRequest($request), true);
 $request = buildRequest("node", "read", array("id" => "*"));
 $nodeList = json_decode(sendRequest($request), true);
 
-
-function buildRequest($table, $operation, $data = array()){
-    $request = array(
-        "table" => $table,
-        "operation" => $operation,
-        "data" => $data
-    );
-
-    return json_encode($request) . "\n";
-}
-
 $arr = null;
+$response = null;
 if(isset($_POST)){
     foreach($_POST as $key => $value){
 
         if(preg_match("/submit_(\\w+)/", $key)){
             $request_data = processForm($_POST);
+            /*$response = sendRequest($request_data);*/
+            $arr = explode("_", $key);
             print_r($request_data);
-            $response = sendRequest($request_data);
         }
     }
 }
 ?>
 
     <div class="container">
+        <div class="jumbotron">
+            <p>Sigma sample graph here</p>
+        </div>
+
         <div class="row col-lg-10 col-lg-offset-1">
             <div class="col-lg-4">
                 <!--form area-->
@@ -258,7 +253,7 @@ if(isset($_POST)){
 
                             <div class="form-group">
                                 <div class="col-lg-9 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-primary" name="submit_node_read">Submit
+                                    <button type="submit" class="btn btn-primary" name="submit_node_update">Submit
                                     </button>
                                 </div>
                             </div>
@@ -439,7 +434,29 @@ if(isset($_POST)){
             <div class="col-lg-8">
                 <!--output area-->
                 <div class="well">
-                    <?php print_r($response); ?>
+                    <?php
+                    if(isset($response)){
+                        if($response == "true"){
+                            echo <<<EOD
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Yay!</strong> Query successful.
+</div>
+EOD;
+                        }
+                        elseif($response == "false"){
+                            echo <<<EOD
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Oops!</strong> Query unsuccessful.
+</div>
+EOD;
+                        }
+                        else{
+                            displayTable($response, $arr[1], $arr[2]);
+                        }
+                    }
+                    ?>
                 </div>
 
             </div>

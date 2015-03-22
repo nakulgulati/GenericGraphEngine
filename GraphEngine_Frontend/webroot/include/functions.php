@@ -36,7 +36,9 @@ function processForm($postArray){
 
         foreach($postArray as $key => $value){
             if(!preg_match("/submit_(\\w+)/", $key)){
-                $request_data['data'][$key] = $value;
+                if($value!=""){
+                    $request_data['data'][$key] = $value;
+                }
             }
         }
 
@@ -46,9 +48,12 @@ function processForm($postArray){
     }
 }
 
-function display($result, $table, $operation){
+function displayTable($result, $table, $operation){
     if($operation != "delete"){
         $array = json_decode($result, true);
+
+        echo "<h4>{$table} - {$operation}</h4>";
+        echo "<hr>";
 
         echo("<table class='table table-striped table-bordered'>");
         echo "<th>" . "Id" . "</th>";
@@ -70,12 +75,9 @@ function display($result, $table, $operation){
                 echo "<td>" . $value . "</td>";
             }
 
-            echo("<br></tr>");
+            echo("</tr>");
         }
-        echo("</table><br><br>");
-    }
-    else{
-        printf($result);
+        echo("</table>");
     }
 }
 
@@ -83,4 +85,14 @@ function generateSelectList($list){
     foreach($list as $item){
         echo "<option value=" . $item['id'] . ">" . $item['name'] . "</option>";
     }
+}
+
+function buildRequest($table, $operation, $data = array()){
+    $request = array(
+        "table" => $table,
+        "operation" => $operation,
+        "data" => $data
+    );
+
+    return json_encode($request) . "\n";
 }

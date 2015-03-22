@@ -13,6 +13,14 @@ body{
     font-size: medium;
 }
 
+form {
+    display: none;
+}
+
+.dropdown:hover .dropdown-menu{
+    display: block;
+}
+
 /*.container-fluid
 {
     background: #52B3D9;

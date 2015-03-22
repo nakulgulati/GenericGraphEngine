@@ -2,15 +2,13 @@ function hideForms() {
     $("form").hide();
 }
 
-$(document).ready(hideForms());
-
-$("li.master").find("ul").find("li").click(displaySelectedForm);
+$("nav .dropdown-menu li").click(displaySelectedForm);
 
 function displaySelectedForm(e) {
     if (e.target !== e.currentTarget) {
-        var li = $(this).attr("value");
+        var formName = $(this).attr("value");
         hideForms();
-        $('form[name="' + li + '"]').fadeIn();
+        $('form[name="' + formName + '"]').show();
     }
     e.stopPropagation();
 }

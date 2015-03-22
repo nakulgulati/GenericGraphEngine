@@ -41,29 +41,29 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >Type <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Create</a></li>
-                        <li><a href="#">Read</a></li>
-                        <li><a href="#">Update</a></li>
-                        <li><a href="#">Delete</a></li>
+                        <li value="type_create"><a href="#">Create</a></li>
+                        <li value="type_read"><a href="#">Read</a></li>
+                        <li value="type_update"><a href="#">Update</a></li>
+                        <li value="type_delete"><a href="#">Delete</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >Node <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Create</a></li>
-                        <li><a href="#">Read</a></li>
-                        <li><a href="#">Update</a></li>
-                        <li><a href="#">Delete</a></li>
+                        <li value="node_create"><a href="#">Create</a></li>
+                        <li value="node_read"><a href="#">Read</a></li>
+                        <li value="node_update"><a href="#">Update</a></li>
+                        <li value="node_delete"><a href="#">Delete</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >Edge <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Create</a></li>
-                        <li><a href="#">Read</a></li>
-                        <li><a href="#">Update</a></li>
-                        <li><a href="#">Delete</a></li>
-                        <li class="divider"></li>
+                        <li value="edge_create"><a href="#">Create</a></li>
+                        <li value="edge_read"><a href="#">Read</a></li>
+                        <li value="edge_update"><a href="#">Update</a></li>
+                        <li value="edge_delete"><a href="#">Delete</a></li>
+                        <!--<li class="divider"></li>-->
                         <li><a href="#">Entity Association Graph</a></li>
                     </ul>
                 </li>
