@@ -5,11 +5,20 @@
     margin: auto;
 }
 
+body{
+    padding-top: 90px;
+}
+
+#navbar-menu-collapse a{
+    font-size: medium;
+}
+
 /*.container-fluid
 {
     background: #52B3D9;
 
 }*/
+/*
 #home:hover
 {
     text-decoration: none;
@@ -88,3 +97,4 @@ h1
 {
     display:none;
 }
+*/

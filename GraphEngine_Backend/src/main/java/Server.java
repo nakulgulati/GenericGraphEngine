@@ -66,7 +66,6 @@ public class Server{
             try{
                 InputStream input = clientSocket.getInputStream();
                 OutputStream output = clientSocket.getOutputStream();
-                long time = System.currentTimeMillis();
 
                 PrintStream os = new PrintStream(output);
 
@@ -80,7 +79,6 @@ public class Server{
 
                 output.close();
                 input.close();
-                System.out.println("Request processed: " + time);
                 Base.close();
             } catch(Exception e){
                 //report exception somewhere.

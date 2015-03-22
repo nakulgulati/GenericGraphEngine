@@ -78,3 +78,9 @@ function display($result, $table, $operation){
         printf($result);
     }
 }
+
+function generateSelectList($list){
+    foreach($list as $item){
+        echo "<option value=" . $item['id'] . ">" . $item['name'] . "</option>";
+    }
+}

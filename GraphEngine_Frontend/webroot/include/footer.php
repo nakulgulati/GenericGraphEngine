@@ -5,13 +5,15 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/sigma.min.js"></script>
 <!--custom scripts-->
-<script src="js/scripts.js"></script>
+<!--<script src="js/scripts.js"></script>-->
 
 <script src="js/plugins/sigma.parsers.json.min.js"></script>
 
 <?php
 
-$request_data = array(
+/*sigma test*/
+
+/*$request_data = array(
     "table" => "edge",
     "operation" => "associations",
     "data" => array(
@@ -27,7 +29,7 @@ $response = sendRequest($request_data);
 echo "<script language=\"JavaScript\">
 var response = {$response};
 displayEntityAssociationGraph(response);
-</script>";
+</script>";*/
 
 
 ?>

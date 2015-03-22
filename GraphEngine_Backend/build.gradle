@@ -57,6 +57,6 @@ compileJava.doLast {
 }
 
 task run(dependsOn: 'build', type: JavaExec) {
-    main = 'Test'
+    main = 'Server'
     classpath = sourceSets.main.runtimeClasspath
 }

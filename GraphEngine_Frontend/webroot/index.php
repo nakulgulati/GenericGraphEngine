@@ -2,334 +2,449 @@
 <?php require_once('include/header.php'); ?>
 
 <?php
+/*TODO
+ * refactor*/
+$request = buildRequest("type", "read", array("id" => "*"));
+$typeList = json_decode(sendRequest($request), true);
+//echo "<pre>".print_r($typeList)."</pre>";
+
+
+$request = buildRequest("node", "read", array("id" => "*"));
+$nodeList = json_decode(sendRequest($request), true);
+
+
+function buildRequest($table, $operation, $data = array()){
+    $request = array(
+        "table" => $table,
+        "operation" => $operation,
+        "data" => $data
+    );
+
+    return json_encode($request) . "\n";
+}
+
 $arr = null;
 if(isset($_POST)){
     foreach($_POST as $key => $value){
 
         if(preg_match("/submit_(\\w+)/", $key)){
             $request_data = processForm($_POST);
+            print_r($request_data);
             $response = sendRequest($request_data);
-            $arr = explode("_", $key);
-
         }
     }
 }
-
 ?>
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <h1>Menu</h1>
+        <div class="row col-lg-10 col-lg-offset-1">
+            <div class="col-lg-4">
+                <!--form area-->
 
-                <ul class="nav nav-pills nav-stacked">
+                <!--Type Create-->
+                <div class="row">
+                    <form class="form-horizontal" name="type_create" method="post">
+                        <fieldset>
+                            <legend>Type - Create</legend>
+                            <div class="form-group">
+                                <label for="name" class="col-lg-3 control-label">Name</label>
 
-                    <li class="master"><a data-toggle="collapse" href="#type" aria-expanded="false"
-                                          aria-controls="type">Type</a>
-
-                        <div class="collapse" id="type">
-                            <div class="well">
-                                <ul>
-                                    <li value="type_add"><a href="#">Add</a></li>
-                                    <li value="type_delete"><a href="#">Delete</a></li>
-                                    <li value="type_update"><a href="#">Update</a></li>
-                                    <li value="type_read"><a href="#">Read</a></li>
-                                </ul>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter Type Name"
+                                           required>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="master"><a data-toggle="collapse" href="#node" aria-expanded="false"
-                                          aria-controls="node">Node</a>
 
-                        <div class="collapse" id="node">
-                            <div class="well">
-                                <ul>
-                                    <li value="node_add"><a href="#">Add</a></li>
-                                    <li value="node_delete"><a href="#">Delete</a></li>
-                                    <li value="node_update"><a href="#">Update</a></li>
-                                    <li value="node_read"><a href="#">Read</a></li>
-                                </ul>
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_type_create">Submit
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="master"><a data-toggle="collapse" href="#edge" aria-expanded="false"
-                                          aria-controls="edge">Edge</a>
+                        </fieldset>
+                    </form>
+                </div>
 
-                        <div class="collapse" id="edge">
-                            <div class="well">
-                                <ul>
-                                    <li value="edge_add"><a href="#">Add</a></li>
-                                    <li value="edge_delete"><a href="#">Delete</a></li>
-                                    <li value="edge_update"><a href="#">Update</a></li>
-                                    <li value="edge_read"><a href="#">Read</a></li>
-                                </ul>
+                <!--Type Read-->
+                <div class="row">
+                    <form class="form-horizontal" name="type_read" method="post">
+                        <fieldset>
+                            <legend>Type - Read</legend>
+                            <div class="form-group">
+                                <label for="id" class="col-lg-3 control-label">Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="id" required>
+                                        <option value="*">*</option>
+                                        <?php generateSelectList($typeList); ?>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_type_read">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Type Update-->
+                <div class="row">
+                    <form class="form-horizontal" name="type_update" method="post">
+                        <fieldset>
+                            <legend>Type - Update</legend>
+                            <div class="form-group">
+                                <label for="id" class="col-lg-3 control-label">Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($typeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-lg-3 control-label">Name</label>
+
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter name"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_type_update">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Type Delete-->
+                <div class="row">
+                    <form class="form-horizontal" name="type_delete" method="post">
+                        <fieldset>
+                            <legend>Type - Delete</legend>
+                            <div class="form-group">
+                                <label for="id" class="col-lg-3 control-label">Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($typeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_type_delete">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Node Create-->
+                <div class="row">
+                    <form class="form-horizontal" name="node_create" method="post">
+                        <fieldset>
+                            <legend>Node - Create</legend>
+                            <div class="form-group">
+                                <label for="name" class="col-lg-3 control-label">Name</label>
+
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter node name"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="type_id" class="col-lg-3 control-label">Type Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="type_id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($typeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_node_create">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Node Read-->
+                <div class="row">
+                    <form class="form-horizontal" name="node_read" method="post">
+                        <fieldset>
+                            <legend>Node - Read</legend>
+                            <div class="form-group">
+                                <label for="id" class="col-lg-3 control-label">Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="id" required>
+                                        <option value="*">*</option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="type_id" class="col-lg-3 control-label">Type Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="type_id" required>
+                                        <option value="*">*</option>
+                                        <?php generateSelectList($typeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_node_read">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Node Update-->
+                <div class="row">
+                    <form class="form-horizontal" name="node_update" method="post">
+                        <fieldset>
+                            <legend>Node - Update</legend>
+                            <div class="form-group">
+                                <label for="id" class="col-lg-3 control-label">Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-lg-3 control-label">Name</label>
+
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter node name"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="type_id" class="col-lg-3 control-label">Type Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="type_id">
+                                        <option value=""></option>
+                                        <?php generateSelectList($typeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_node_read">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Node Delete-->
+                <div class="row">
+                    <form class="form-horizontal" name="node_delete" method="post">
+                        <fieldset>
+                            <legend>Node - Delete</legend>
+                            <div class="form-group">
+                                <label for="id" class="col-lg-3 control-label">Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_node_delete">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Edge Create-->
+                <div class="row">
+                    <form class="form-horizontal" name="edge_create" method="post">
+                        <fieldset>
+                            <legend>Edge - Create</legend>
+                            <div class="form-group">
+                                <label for="from_id" class="col-lg-3 control-label">From Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="from_id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="to_id" class="col-lg-3 control-label">To Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="to_id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_edge_create">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Edge Read-->
+                <div class="row">
+                    <form class="form-horizontal" name="edge_read" method="post">
+                        <fieldset>
+                            <legend>Edge - Read</legend>
+                            <div class="form-group">
+                                <label for="from_id" class="col-lg-3 control-label">From Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="from_id" required>
+                                        <option value="*">*</option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_edge_read">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Edge Update-->
+                <div class="row">
+                    <form class="form-horizontal" name="edge_update" method="post">
+                        <fieldset>
+                            <legend>Edge - Update</legend>
+                            <div class="form-group">
+                                <label for="from_id" class="col-lg-3 control-label">From Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="from_id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="to_id" class="col-lg-3 control-label">To Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="to_id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="to_id_new" class="col-lg-3 control-label">To Id (new)</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="to_id_new" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_edge_update">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--Edge Delete-->
+                <div class="row">
+                    <form class="form-horizontal" name="edge_delete" method="post">
+                        <fieldset>
+                            <legend>Edge - Delete</legend>
+                            <div class="form-group">
+                                <label for="from_id" class="col-lg-3 control-label">From Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="from_id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="to_id" class="col-lg-3 control-label">To Id</label>
+
+                                <div class="col-lg-9">
+                                    <select class="form-control" name="to_id" required>
+                                        <option value=""></option>
+                                        <?php generateSelectList($nodeList); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary" name="submit_edge_delete">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
 
             </div>
-            <div class="col-lg-9">
-                <h1>Form/Output</h1>
-
-                <!--
-                Type Add
-                -->
-                <div class="row">
-                    <form id="type_add" class="col-lg-4" name="type_add" method="post">
-                        <h3>Add</h3>
-
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter Type Name">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_type_create">Submit</button>
-                    </form>
-
+            <div class="col-lg-8">
+                <!--output area-->
+                <div class="well">
+                    <?php print_r($response); ?>
                 </div>
-                <!-- Type Delete
-
-                -->
-                <div class="row">
-                    <form id="type_delete" class="col-lg-4 " name="type_delete" method="post">
-                        <h3>Delete</h3>
-
-                        <div class="form-group">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" name="id" placeholder="Enter ID">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_type_delete">Submit</button>
-                    </form>
-                </div>
-                <!--
-                Type Update
-                -->
-                <div class="row">
-                    <form id="type_update" class="col-lg-4" name="type_update" method="post">
-                        <h3>Update</h3>
-
-                        <div class="form-group">
-                            <label for="name">ID</label>
-                            <input type="text" class="form-control" name="id" placeholder="Enter ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter Type Name">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_type_update">Submit</button>
-                    </form>
-                </div>
-                <!--
-                Type Read
-                -->
-                <div class="row">
-                    <form id="type_read" class="col-lg-4" name="type_read" method="post">
-                        <h3>Read</h3>
-
-                        <div class="form-group">
-                            <label for="field">Field</label>
-                            <input type="text" class="form-control" name="field" placeholder="Enter Field">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_type_read">Submit</button>
-                    </form>
-                </div>
-
-                <!--
-                Node Add
-                -->
-                <div class="row">
-                    <form id="node_add" class="col-lg-4" name="node_add" method="post">
-                        <h3>Add</h3>
-
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="type_id">Type ID</label>
-                            <input type="text" class="form-control" name="type_id" placeholder="Enter Type ID">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_node_create">Submit</button>
-                    </form>
-                </div>
-
-                <!--
-                Node Delete
-                -->
-                <div class="row">
-                    <form id="node_delete" class="col-lg-4" name="node_delete" method="post">
-                        <h3>Delete</h3>
-
-                        <div class="form-group">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" name="id" placeholder="Enter ID">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_node_delete">Submit</button>
-                    </form>
-                </div>
-                <!--
-                Node Update
-                -->
-                <div class="row">
-                    <form class="col-lg-4" id="node_update" name="node_update" method="post">
-                        <h3>Update</h3>
-
-                        <div class="form-group">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" name="id" placeholder="Enter ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="type_id">Type ID</label>
-                            <input type="text" class="form-control" name="type_id" placeholder="Enter Type ID">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_node_update">Submit</button>
-                    </form>
-                </div>
-                <!--
-                Node Read
-                -->
-                <div>
-                    <form name="node_read" method="post" class="col-lg-4">
-                        <h3>Read</h3>
-
-                        <div class="form-group">
-                            <label for="id">Field</label>
-                            <input type="text" class="form-control" name="field" placeholder="Enter Field">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_node_read">Submit</button>
-                    </form>
-                </div>
-
-                <!--
-                    Edge add
-                -->
-                <div class="row">
-                    <form id="edge_add" class="col-lg-4" name="edge_add" method="post">
-                        <h3>Add</h3>
-
-                        <div class="form-group">
-                            <label for="from_id">From ID</label>
-                            <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="to_id">To ID</label>
-                            <input type="text" class="form-control" name="to_id" placeholder="Enter To ID">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_edge_create">Submit</button>
-                    </form>
-                </div>
-                <!--
-                Edge Delete
-                -->
-                <div class="row">
-                    <form class="col-lg-4" id="edge_delete" name="edge_delete" method="post">
-                        <h3>Delete</h3>
-
-                        <div class="form-group">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" name="id" placeholder="Enter ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="from_id">From ID</label>
-                            <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="to_id">To ID</label>
-                            <input type="text" class="form-control" name="to_id" placeholder="Enter To ID">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_edge_delete">Submit</button>
-                    </form>
-                </div>
-                <!--
-                Edge Update
-                -->
-                <div class="row">
-                    <form class="col-lg-4" id="edge_update" name="edge_update" method="post">
-                        <h3>Update</h3>
-
-                        <div class="form-group">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" name="id" placeholder="Enter ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="from_id">From ID</label>
-                            <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="to_id">To ID</label>
-                            <input type="text" class="form-control" name="to_id" placeholder="Enter To ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="new_to_id">New To ID</label>
-                            <input type="text" class="form-control" name="new_to_id" placeholder="Enter New To ID">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-default" name="submit_edge_update">Submit</button>
-                    </form>
-                </div>
-                <!--
-                    Edge Read
-                -->
-                <div class="row">
-                    <form class="col-lg-4" id="edge_read" name="edge_read" method="post">
-                        <h3>Read</h3>
-
-                        <div class="form-group">
-                            <label for="from_id">From ID</label>
-                            <input type="text" class="form-control" name="from_id" placeholder="Enter From ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="field">Field</label>
-                            <input type="text" class="form-control" name="field" placeholder="Enter Field">
-                        </div>
-
-                        <button type="submit" class="btn btn-default" name="submit_edge_read">Submit</button>
-                    </form>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <?php
-                        if(isset($arr)){
-                            display($response, $arr[1], $arr[2]);
-                        }
-                        ?>
-                    </div>
-
-                </div>
-
-                <div class="row" id="sigmaTest">
-
-                </div>
-
 
             </div>
         </div>
     </div>
+
 
 <?php require_once('include/footer.php'); ?>
