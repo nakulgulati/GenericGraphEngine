@@ -31,8 +31,8 @@ public class Edge extends TableModel{
         edge.set("from_id", Integer.parseInt(params.get("from_id").toString())).set("to_id", Integer.parseInt(params.get("to_id").toString()));
 
         edge.saveIt();
-        int lastUpdatedId = (int) edge.getId();
-        modelList = Type.find("id",lastUpdatedId);
+        long lastUpdatedId = (long) edge.getId();
+        modelList = Type.find("id = ?",lastUpdatedId);
         return modelList;
     }
 
@@ -57,7 +57,7 @@ public class Edge extends TableModel{
         edge.set("to_id", to_id);
         edge.saveIt();
         int lastUpdatedId = (int) edge.getId();
-        modelList = Type.find("id",lastUpdatedId);
+        modelList = Type.find("id = ?",lastUpdatedId);
         return modelList;
     }
 
