@@ -59,8 +59,8 @@ public class Node extends TableModel{
         }
 
         node.saveIt();
-        long node_id = (long) node.getId();
-        modelList = Node.find("id= ?",id);
+        long lastUpdatedId = (long) node.getId();
+        modelList = Node.find("id= ?",lastUpdatedId);
         return modelList;
     }
 

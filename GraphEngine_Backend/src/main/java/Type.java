@@ -55,7 +55,7 @@ public class Type extends TableModel{
             return null;
         }
         type.set("name", params.get("name").toString()).saveIt();
-        long lastupdatedId =(long) type.getId();
+        long lastupdatedId =type.getLongId();
         modelList = find("id=?", lastupdatedId);
         return modelList;
     }
