@@ -10,10 +10,6 @@ public class Edge extends TableModel{
 
         LazyList<TableModel> modelList = null;
 
-        if(params.has("field")){
-            modelList = Edge.findAll();
-        }
-
         if(params.has("from_id")){
             modelList = Edge.find("from_id = ?", Integer.parseInt(params.get("from_id").toString()));
         }

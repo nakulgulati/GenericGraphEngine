@@ -9,15 +9,18 @@ public class Node extends TableModel{
         Node node;
         if(params.has("id")){
             args = params.get("id").toString();
-            node = Node.findById(Integer.parseInt(args));
-            if(node != null){
-                modelList = Node.find("id = ?", args);
+            if(args.equals("*")){
+                modelList = Type.findAll();
             }
-        }
-        if(params.has("field")){
-            modelList = Type.findAll();
-        }
+            else{
+                node = Node.findById(Integer.parseInt(args));
+                if(node != null){
+                    modelList = Node.find("id = ?", args);
+                }
+            }
 
+        }
+        
         if(params.has("type_id")){
             args = params.get("type_id").toString();
             modelList = Node.find("type_id = ?", (Integer.parseInt(args)));

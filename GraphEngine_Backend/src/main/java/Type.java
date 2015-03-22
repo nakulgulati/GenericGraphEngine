@@ -14,16 +14,18 @@ public class Type extends TableModel{
         String args;
         LazyList<TableModel> modelList = null;
         Type type;
-        if(params.has("field")){
-            modelList = Type.findAll();
-        }
+        
         if(params.has("id")){
             args = params.get("id").toString();
-            type = Type.findById(Integer.parseInt(args));
-            if(type != null)
-                modelList.add(type);
+            if(args.equals("*")){
+                modelList = Type.findAll();
+            }
+            else{
+                type = Type.findById(Integer.parseInt(args));
+                if(type != null)
+                    modelList.add(type);
+            }
         }
-
         return modelList;
     }
 
