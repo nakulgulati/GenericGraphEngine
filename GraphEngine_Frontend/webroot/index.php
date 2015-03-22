@@ -19,7 +19,7 @@ if(isset($_POST)){
 
         if(preg_match("/submit_(\\w+)/", $key)){
             $request_data = processForm($_POST);
-            /*$response = sendRequest($request_data);*/
+            $response = sendRequest($request_data);
             $arr = explode("_", $key);
             print_r($request_data);
         }
@@ -202,8 +202,8 @@ if(isset($_POST)){
                                 <label for="type_id" class="col-lg-3 control-label">Type Id</label>
 
                                 <div class="col-lg-9">
-                                    <select class="form-control" name="type_id" required>
-                                        <option value="*">*</option>
+                                    <select class="form-control" name="type_id">
+                                        <option value=""></option>
                                         <?php generateSelectList($typeList); ?>
                                     </select>
                                 </div>
@@ -455,7 +455,8 @@ EOD;
 EOD;
                         }
                         else{
-                            displayTable($response, $arr[1], $arr[2]);
+                            print_r($response);
+                            //displayTable($response, $arr[1], $arr[2]);
                         }
                     }
                     ?>

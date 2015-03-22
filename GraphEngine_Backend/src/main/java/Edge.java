@@ -28,7 +28,7 @@ public class Edge extends TableModel{
 
         edge.saveIt();
         long lastUpdatedId = (long) edge.getId();
-        modelList = Type.find("id = ?",lastUpdatedId);
+        modelList = Edge.find("id = ?",lastUpdatedId);
         return modelList;
     }
 

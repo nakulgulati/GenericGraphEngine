@@ -10,7 +10,7 @@ public class Node extends TableModel{
         if(params.has("id")){
             args = params.get("id").toString();
             if(args.equals("*")){
-                modelList = Type.findAll();
+                modelList = Node.findAll();
             }
             else{
                 node = Node.findById(Integer.parseInt(args));

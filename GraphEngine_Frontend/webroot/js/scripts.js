@@ -1,5 +1,5 @@
 /*Sample sigma graph*/
-sampleGraph(100,75);
+sampleGraph(50,25);
 
 function sampleGraph(nodes, edges){
     var nodeList = [];
