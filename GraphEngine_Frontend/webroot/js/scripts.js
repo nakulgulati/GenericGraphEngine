@@ -1,3 +1,50 @@
+/*Sample sigma graph*/
+sampleGraph(100,75);
+
+function sampleGraph(nodes, edges){
+    var nodeList = [];
+    var edgeList = [];
+
+    /*generate nodes*/
+    for(var i = 1; i <= nodes; i++){
+        nodeList.push({
+            "id": i.toString(),
+            "label": "node"+i,
+            "x": Math.floor((Math.random() * 850) + 1),
+            "y": Math.floor((Math.random() * 200) + 1),
+            "size": 1
+        });
+    }
+
+    /*generating edges*/
+    for(i = 0; i < edges; i++){
+        var source = Math.floor((Math.random() * (nodes-1)) + 1);
+        var target = Math.floor((Math.random() * (nodes-1)) + 1);
+
+        if(source!=target){
+            edgeList.push({
+                "id": i.toString(),
+                "source": source.toString(),
+                "target": target.toString()
+            });
+        }
+    }
+
+    var data = {
+        "nodes": nodeList,
+        "edges": edgeList
+    };
+
+    s = new sigma({
+        graph: data,
+        container: 'sampleGraph',
+        settings: {
+            defaultNodeColor: '#ec5148',
+            drawLabels: false
+        }
+    });
+}
+
 function hideForms() {
     $("form").hide();
 }
@@ -22,8 +69,8 @@ function displayEntityAssociationGraph(json_response) {
     nodeList.push({
         "id": (json_response[0].from_id).toString(),
         "label": (json_response[0].from_id).toString(),
-        "x": 0,
-        "y": 0,
+        "x": Math.random(),
+        "y": Math.random(),
         "size": 1
     });
 

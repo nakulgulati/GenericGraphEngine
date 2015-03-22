@@ -21,6 +21,10 @@ form {
     display: block;
 }
 
+#sampleGraph{
+    height: 200px;
+}
+
 /*.container-fluid
 {
     background: #52B3D9;

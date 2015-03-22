@@ -29,7 +29,9 @@ if(isset($_POST)){
 
     <div class="container">
         <div class="jumbotron">
-            <p>Sigma sample graph here</p>
+            <div id="sampleGraph">
+
+            </div>
         </div>
 
         <div class="row col-lg-10 col-lg-offset-1">
