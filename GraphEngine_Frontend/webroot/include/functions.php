@@ -83,13 +83,6 @@ function displayTable($result, $table, $operation){
             }
         }
         else {
-
-            foreach ($array as $ele => $item) {
-                echo("<tr>");
-                foreach ($item as $ele => $value) {
-                    echo "<td>" . $value . "</td>";
-                }
-            }
             foreach ($array as $ele => $item) {
                 echo("<tr>");
                 foreach ($item as $ele => $value) {
