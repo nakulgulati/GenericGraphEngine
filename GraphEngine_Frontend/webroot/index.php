@@ -199,7 +199,8 @@ if(isset($_POST)){
                             <label for="id" class="col-lg-3 control-label">Id</label>
 
                             <div class="col-lg-9">
-                                <select class="form-control" name="id" required>
+                                <select class="form-control" name="id">
+                                    <option value=""></option>
                                     <option value="*">*</option>
                                     <?php generateSelectList($nodeList); ?>
                                 </select>

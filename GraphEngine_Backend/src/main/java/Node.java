@@ -5,23 +5,25 @@ public class Node extends TableModel{
     @Override
     public LazyList<TableModel> read(JSONObject params){
         String args;
+        int id, type_id;
         LazyList<TableModel> modelList = null;
-        Node node;
+
         if(params.has("id")){
             args = params.get("id").toString();
+
             if(args.equals("*")){
                 modelList = Node.findAll();
             } else{
-                node = Node.findById(Integer.parseInt(args));
-                if(node != null){
-                    modelList = Node.find("id = ?", args);
-                }
+                id = Integer.parseInt(args);
+                modelList = Node.find("id = ?", id);
             }
-        } else if(params.has("type_id")){
-            args = params.get("type_id").toString();
-            modelList = Node.find("type_id = ?", (Integer.parseInt(args)));
         }
 
+        if(params.has("type_id")){
+            args = params.get("type_id").toString();
+            type_id = Integer.parseInt(args);
+            modelList = Node.find("type_id = ?", type_id);
+        }
 
         return modelList;
     }

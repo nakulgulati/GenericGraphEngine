@@ -18,8 +18,8 @@ function sampleGraph(nodes, edges){
 
     /*generating edges*/
     for(i = 0; i < edges; i++){
-        var source = Math.floor((Math.random() * (nodes-1)) + 1);
-        var target = Math.floor((Math.random() * (nodes-1)) + 1);
+        var source = Math.floor((Math.random() * nodes) + 1);
+        var target = Math.floor((Math.random() * nodes) + 1);
 
         if(source!=target){
             edgeList.push({
