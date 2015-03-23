@@ -49,35 +49,58 @@ function processForm($postArray){
 }
 
 function displayTable($result, $table, $operation){
-    if($operation != "delete"){
+    if($operation != "delete") {
         $array = json_decode($result, true);
 
         echo "<h4>{$table} - {$operation}</h4>";
         echo "<hr>";
 
         echo("<table class='table table-striped table-bordered'>");
+
+
+
         echo "<th>" . "Id" . "</th>";
 
-        if($table != "edge"){
+        if ($table != "edge") {
             echo "<th>" . "Name" . "</th>";
         }
-        if($table == "node"){
+        if ($table == "node") {
             echo "<th>" . "Type_Id" . "</th>";
         }
-        if($table == "edge"){
+        if ($table == "edge") {
             echo "<th>" . "From_Id" . "</th>";
             echo "<th>" . "To_Id" . "</th>";
         }
 
-        foreach($array as $ele => $item){
-            echo("<tr>");
-            foreach($item as $ele => $value){
-                echo "<td>" . $value . "</td>";
+        if ($table == "edge") {
+            foreach($array as $row)
+            {
+                echo '<tr>';
+                echo '<td>' . $row['id'] . '</td>';
+                echo '<td>' . $row['from_id'] . '</td>';
+                echo '<td>' . $row['to_id'] . '</td>';
+                echo '</tr>';
             }
-
-            echo("</tr>");
         }
-        echo("</table>");
+        else {
+
+            foreach ($array as $ele => $item) {
+                echo("<tr>");
+                foreach ($item as $ele => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+            }
+            foreach ($array as $ele => $item) {
+                echo("<tr>");
+                foreach ($item as $ele => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+
+                echo("</tr>");
+            }
+            echo("</table>");
+        }
+
     }
 }
 
