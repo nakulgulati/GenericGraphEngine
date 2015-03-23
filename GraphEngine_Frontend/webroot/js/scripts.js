@@ -1,5 +1,5 @@
 /*Sample sigma graph*/
-sampleGraph(50,25);
+//sampleGraph(10,8);
 
 function sampleGraph(nodes, edges){
     var nodeList = [];
@@ -11,7 +11,7 @@ function sampleGraph(nodes, edges){
             "id": i.toString(),
             "label": "node"+i,
             "x": Math.floor((Math.random() * 850) + 1),
-            "y": Math.floor((Math.random() * 200) + 1),
+            "y": Math.floor((Math.random() * 150) + 1),
             "size": 1
         });
     }
@@ -60,7 +60,7 @@ function displaySelectedForm(e) {
     e.stopPropagation();
 }
 
-function displayEntityAssociationGraph(json_response) {
+function displayEntityAssociationGraph(json_response, nodes) {
 
     /*TODO
      * find a better way to implement this*/
@@ -82,6 +82,15 @@ function displayEntityAssociationGraph(json_response) {
             "y": Math.random(),
             "size": 1
         });
+    }
+
+    for(var i = 0; i< nodeList.length; i++){
+        for (var j = 0; j<nodes.length; j++){
+            if(nodeList[i].id == nodes[j].id){
+                nodeList[i].label = nodes[j].name;
+                break;
+            }
+        }
     }
 
     for (var i = 0; i < json_response.length; i++) {

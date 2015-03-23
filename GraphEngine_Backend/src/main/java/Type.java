@@ -21,9 +21,7 @@ public class Type extends TableModel{
                 modelList = Type.findAll();
             }
             else{
-                type = Type.findById(Integer.parseInt(args));
-                if(type != null)
-                    modelList.add(type);
+                modelList = Type.find("id = ?", Integer.parseInt(args));
             }
         }
         return modelList;

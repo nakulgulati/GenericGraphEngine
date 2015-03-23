@@ -35,7 +35,7 @@ public class Process{
         this.model = model;
     }
 
-    public String operateCRUD(){
+    public synchronized String operateCRUD(){
 
         String operation = json.get("operation").toString();
         JSONObject data = json.getJSONObject("data");
@@ -53,14 +53,14 @@ public class Process{
                     response = false;
                 break;
             case "update":
-                response = model.update(data);
+                response = model.update(data).toJson(true);
                 if(response == null)
                     response = false;
                 break;
             case "delete":
                 response = model.remove(data);
                 break;
-            case "associations":
+            case "association":
                 response = model.getEntityAssociations(data).toJson(true);
                 break;
         }

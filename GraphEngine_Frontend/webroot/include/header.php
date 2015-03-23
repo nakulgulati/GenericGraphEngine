@@ -64,7 +64,7 @@
                         <li value="edge_update"><a href="#">Update</a></li>
                         <li value="edge_delete"><a href="#">Delete</a></li>
                         <!--<li class="divider"></li>-->
-                        <li><a href="#">Entity Association Graph</a></li>
+                        <li value="edge_association"><a href="#">Entity Association Graph</a></li>
                     </ul>
                 </li>
             </ul>

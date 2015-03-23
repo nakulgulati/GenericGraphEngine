@@ -5,7 +5,7 @@ require_once('constants.php');
 function sendRequest($data){
 
     $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
-    $result = socket_connect($socket, SERVER_IP, SERVER_PORT) or die("Could not connect to server\n");
+    $result = socket_connect($socket, SERVER_IP, SERVER_PORT) or die("Server is down for maintainance\n");
 
     socket_write($socket, $data, strlen($data)) or die("Could not send data to server\n");
 

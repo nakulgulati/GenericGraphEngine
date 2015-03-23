@@ -11,20 +11,17 @@ public class Node extends TableModel{
             args = params.get("id").toString();
             if(args.equals("*")){
                 modelList = Node.findAll();
-            }
-            else{
+            } else{
                 node = Node.findById(Integer.parseInt(args));
                 if(node != null){
                     modelList = Node.find("id = ?", args);
                 }
             }
-
-        }
-        
-        if(params.has("type_id")){
+        } else if(params.has("type_id")){
             args = params.get("type_id").toString();
             modelList = Node.find("type_id = ?", (Integer.parseInt(args)));
         }
+
 
         return modelList;
     }
@@ -35,10 +32,10 @@ public class Node extends TableModel{
         String name = params.get("name").toString();
         int type_id = Integer.parseInt(params.get("type_id").toString());
         Node node = new Node();
-        node.set("name", name).set("type_id",type_id);
+        node.set("name", name).set("type_id", type_id);
         node.saveIt();
         long id = (long) node.getId();
-        modelList = find("id =?",id);
+        modelList = find("id =?", id);
         return modelList;
     }
 
@@ -62,8 +59,8 @@ public class Node extends TableModel{
         }
 
         node.saveIt();
-        long lastUpdatedId = (long) node.getId();
-        modelList = Node.find("id= ?",lastUpdatedId);
+        int lastUpdatedId = (int) node.getId();
+        modelList = Node.find("id= ?", lastUpdatedId);
         return modelList;
     }
 
