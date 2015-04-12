@@ -15,28 +15,28 @@ public class EdgeTest{
 
     }
 
-    @org.junit.Test
+    @Test
     public void testRead() throws Exception{
 
     }
 
     @Test
     public void testAdd() throws Exception{
-
+        assertFalse(true);
     }
 
     @Test
     public void testUpdate() throws Exception{
-
+        assertFalse(false);
     }
 
     @Test
     public void testRemove() throws Exception{
-
+        assertFalse(false);
     }
 
     @Test
     public void testGetEntityAssociations() throws Exception{
-
+        assertFalse(false);
     }
 }

@@ -15,23 +15,23 @@ public class TypeTest{
 
     }
 
-    @org.junit.Test
+    @Test
     public void testRead() throws Exception{
-
+        assertFalse(false);
     }
 
     @Test
     public void testAdd() throws Exception{
-
+        assertFalse(false);
     }
 
     @Test
     public void testUpdate() throws Exception{
-
+        assertFalse(false);
     }
 
     @Test
     public void testRemove() throws Exception{
-
+        assertFalse(false);
     }
 }
