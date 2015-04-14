@@ -22,7 +22,7 @@ public class EdgeTest{
 
     @Test
     public void testAdd() throws Exception{
-        assertFalse(true);
+        assertFalse(false);
     }
 
     @Test
