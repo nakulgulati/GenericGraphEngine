@@ -56,7 +56,21 @@ compileJava.doLast {
     instrumentation.instrument()
 }
 
+compileTestJava.doLast {
+    Instrumentation instrumentation = new Instrumentation()
+    def projectMainClassesDir = sourceSets.main.output.classesDir.getPath()
+    def projectTestClassesDir = sourceSets.test.output.classesDir.getPath()
+    def rootLoader = this.class.classLoader.rootLoader
+    instrumentation.outputDirectory = projectMainClassesDir
+    instrumentation.outputDirectory = projectTestClassesDir
+    addUrlIfNotPresent rootLoader, projectMainClassesDir
+    addUrlIfNotPresent rootLoader, projectTestClassesDir
+    addUrlIfNotPresent Instrumentation.class.classLoader, projectMainClassesDir
+    addUrlIfNotPresent Instrumentation.class.classLoader, projectTestClassesDir
+    instrumentation.instrument()
+}
+
 task run(dependsOn: 'build', type: JavaExec) {
-    main = 'Server'
+    main = 'Test'
     classpath = sourceSets.main.runtimeClasspath
 }
