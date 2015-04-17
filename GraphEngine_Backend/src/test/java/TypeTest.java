@@ -5,9 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.Statement;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TypeTest{
 
@@ -18,7 +19,7 @@ public class TypeTest{
         ScriptRunner runner = new ScriptRunner(con, false, true);
         runner.runScript(new BufferedReader(new FileReader("src/test/resources/graph_engine_test.sql")));*/
 
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_test", "root", "");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/graph_engine_test", "root", "ishita");
         Connection con = Base.connection();
         con.setAutoCommit(false);
         Base.openTransaction();
@@ -29,7 +30,12 @@ public class TypeTest{
         /*Connection con = Base.connection();
         Statement s = con.createStatement();
         s.executeUpdate("DROP DATABASE `graph_engine_test`;");*/
+
+        Connection con = Base.connection();
+        Statement s = con.createStatement();
+
         Base.rollbackTransaction();
+        s.executeUpdate("ALTER TABLE types auto_increment = 3");
         Base.close();
     }
 
@@ -53,16 +59,52 @@ public class TypeTest{
 
     @Test
     public void testAdd() throws Exception{
-        assertFalse(false);
+        Type type = new Type();
+        String addJson = "{" +
+                "name: type_3" +
+                "}";
+        String expectedOut = "[\n" +
+                "  {\n" +
+                "    \"id\":3,\n" +
+                "    \"name\":\"type_3\"\n" +
+                "  }\n" +
+                "]";
+        JSONObject jsonObject = new JSONObject(addJson);
+        addJson = type.add(jsonObject).toJson(true).toString();
+        assertEquals("Type add test: pass", expectedOut, addJson);
+
+
+
     }
 
     @Test
     public void testUpdate() throws Exception{
-        assertFalse(false);
+        Type type = new Type();
+        String updateJson = "{" +
+                "id: 2," +
+                "name: type_4" +
+                "}";
+        String expectedOut = "[\n" +
+                "  {\n" +
+                "    \"id\":2,\n" +
+                "    \"name\":\"type_4\"\n" +
+                "  }\n" +
+                "]";
+        JSONObject jsonObject = new JSONObject(updateJson);
+        updateJson = type.update(jsonObject).toJson(true).toString();
+        assertEquals("Type update test: pass", expectedOut, updateJson);
+
     }
 
     @Test
     public void testRemove() throws Exception{
-        assertFalse(false);
+        Type type = new Type();
+        String removeJson = "{" +
+                "id : 2" +
+                "}";
+        JSONObject jsonObject = new JSONObject(removeJson);
+        boolean result = type.remove(jsonObject);
+        assertTrue(result);
+
     }
 }
